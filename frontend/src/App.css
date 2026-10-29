@@ -46,7 +46,9 @@ main>section {
 }
 
 .brand {
-  margin: 2px 10px 30px;
+  margin: 2px 10px 24px;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .brand strong,
@@ -55,8 +57,8 @@ main>section {
 }
 
 .brand strong {
-  font-size: 18px;
-  line-height: 1.2;
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 .brand small {
@@ -2651,9 +2653,15 @@ input[type="date"] {
 @media (min-width: 751px) {
   .sidebar {
     position: sticky;
+    align-self: start;
     top: 0;
     height: 100vh;
     overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    display: none;
   }
 
   .job-photos-embedded .job-photo-gallery {

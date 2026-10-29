@@ -38,7 +38,19 @@ export function Sidebar({ role }: { role: UserRole }) {
     <nav aria-label={t("主要导航")}>
       <div className="sidebar-direct-links">{role !== 'employee' && <span className="sidebar-section-label">{t("业务工作台")}</span>}{items.map(item => <NavLink key={item.path} to={item.path} end={item.path === '/'}><NavigationIcon path={item.path} /><span>{t(item.label)}</span></NavLink>)}</div>
       {role !== 'employee' && <span className="sidebar-section-label">{t("管理")}</span>}
-      {role !== 'employee' && navigationGroups.map(group => <details key={`${group.label}-${pathname}`} open={group.items.some(item => pathname === item.path || pathname.startsWith(`${item.path}/`))}>
+      {role !== 'employee' && navigationGroups.map(group => <details key={`${group.label}-${pathname}`} open={group.items.some(item => pathname === item.path || pathname.startsWith(`${item.path}/`))} onToggle={event => {
+        const groupElement = event.currentTarget
+        if (!groupElement.open) return
+        const sidebar = groupElement.closest<HTMLElement>('.sidebar')
+        if (!sidebar) return
+        const sidebarBounds = sidebar.getBoundingClientRect()
+        const groupBounds = groupElement.getBoundingClientRect()
+        const offset = groupBounds.top - sidebarBounds.top - 16
+        if (offset !== 0) sidebar.scrollBy({
+          top: offset,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+        })
+      }}>
         <summary>{t(group.label)}</summary>
         <div className="nav-group-items">{group.items.map(item => <NavLink to={item.path} key={item.path}>{t(item.label)}</NavLink>)}</div>
       </details>)}

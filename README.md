@@ -99,7 +99,7 @@ In development, Vite proxies API requests to ASP.NET Core. The backend uses repo
 
 These screenshots show the actual frontend with the demo brand and fictional records supplied by a local, read-only mock API. No database was connected during capture. They illustrate the user interface, not end-to-end backend integration validation.
 
-Screenshots use a 1440-pixel-wide desktop viewport, normally 900 pixels high. The quotation detail uses a taller viewport and the invoice editor uses a full-page capture to show their contents. Text in the images has not been digitally replaced.
+All screenshots use a fixed 1440 × 900 desktop viewport with full-page capture disabled, preserving the sidebar position. List and overview states keep the business information visible without open edit forms. Text in the images has not been digitally replaced.
 
 ### Dashboard
 
@@ -115,12 +115,6 @@ It also provides search, filtering, and sorting capabilities to help users manag
 
 ![Demo Job Management](docs/screenshots/jobs.jpg)
 
-
-### Quotation Details
-
-Review quotation line items, totals and acceptance status, then create a related invoice or service job. The detail view also supports customer-returned PDF attachments.
-
-![Quotation details with synthetic portfolio data](docs/screenshots/quotation-details.jpg)
 
 ### Customers Management
 
@@ -139,12 +133,6 @@ Track quotation totals and confirmation status, with search, date filters and a 
 Review invoice amounts, due dates and payment status across customer accounts.
 
 ![Invoices list](docs/screenshots/invoices-list.jpg)
-
-### Invoice Details / Edit View
-
-The invoice edit view contains customer, due date, payment status, notes and line-item fields. This screenshot shows an existing fictional invoice; no changes were saved during capture.
-
-![Invoice details in the edit view](docs/screenshots/invoice-details.jpg)
 
 ### Expenses / Reimbursements
 
