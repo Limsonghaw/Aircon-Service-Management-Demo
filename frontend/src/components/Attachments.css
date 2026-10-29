@@ -1,0 +1,58 @@
+.attachment-gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(220px,100%),1fr)); gap:16px; list-style:none; margin:16px 0 0; padding:0; }
+.attachment-card { display:flex; flex-direction:column; gap:10px; min-width:0; padding:12px; border:1px solid #d7e2e8; border-radius:12px; background:#fff; color:#173c4e; }
+.attachment-thumbnail { position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; width:100%; height:160px; padding:0; border:0; border-radius:8px; background:#f2f7f7; color:#117b79; cursor:pointer; overflow:hidden; font:inherit; }
+.attachment-thumbnail img { width:100%; height:100%; object-fit:contain; }
+.attachment-thumbnail:focus-visible, .attachment-preview-dialog button:focus-visible { outline:3px solid #81d5cd; outline-offset:2px; }
+.attachment-pdf-thumbnail span { padding:10px 16px; border:1px solid #94ccc5; border-radius:8px; font-size:24px; font-weight:700; }
+.attachment-pdf-thumbnail small { margin-top:10px; font-size:13px; }
+.attachment-image-loading { position:absolute; padding:10px; font-size:13px; }
+.attachment-thumb-error { display:grid; place-content:center; height:160px; border:1px dashed #bdcbd1; border-radius:8px; color:#173c4e; font-size:14px; }
+.attachment-file-info { min-width:0; flex:1; }
+.attachment-file-info strong { display:block; font-size:14px; line-height:1.5; overflow-wrap:anywhere; }
+.attachment-file-info small { display:block; margin-top:5px; font-size:12px; line-height:1.5; color:#526873; overflow-wrap:anywhere; }
+.attachment-card-actions { display:flex; gap:8px; margin-top:auto; }
+.attachment-card-actions > * { flex:1; justify-content:center; text-align:center; font-size:14px; min-height:40px; box-sizing:border-box; }
+.attachment-pending-list { list-style:none; padding:0; margin:16px 0; display:grid; gap:10px; }
+.attachment-pending-card { display:flex; align-items:center; gap:12px; border:1px solid #d7e2e8; border-radius:10px; padding:10px; background:#f7fbfa; min-width:0; }
+.attachment-pending-card .attachment-thumbnail, .attachment-pending-card .attachment-thumb-error { width:76px; height:76px; flex:0 0 76px; }
+.attachment-pending-card .attachment-pdf-thumbnail span { padding:5px; font-size:16px; }
+.attachment-pending-card .attachment-pdf-thumbnail small { display:none; }
+.attachment-progress { display:grid; gap:8px; padding:14px; border:1px solid #a9d7d2; border-radius:10px; background:#edf8f5; margin:16px 0; color:#173c4e; overflow-wrap:anywhere; }
+.attachment-progress strong { font-size:14px; }
+.attachment-progress small { color:#526873; font-size:12px; }
+.attachment-progress progress { width:100%; height:10px; accent-color:#117b79; }
+.attachment-retry { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:10px 0; }
+.attachment-preview-dialog { width:min(960px,calc(100vw - 32px)); height:min(760px,calc(100dvh - 32px)); max-width:calc(100vw - 32px); max-height:calc(100dvh - 32px); padding:0; margin:auto; box-sizing:border-box; border:1px solid #d7e2e8; border-radius:14px; color:#173c4e; background:white; overflow:hidden; }
+.attachment-preview-dialog[open] { display:flex; flex-direction:column; }
+.attachment-preview-dialog::backdrop { background:#082f4970; }
+.attachment-preview-dialog header, .attachment-preview-dialog footer { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 18px; flex-shrink:0; }
+.attachment-preview-dialog header { border-bottom:1px solid #d7e2e8; }
+.attachment-preview-dialog h2 { margin:0; font-size:17px; min-width:0; overflow-wrap:anywhere; }
+.attachment-preview-dialog header button { flex-shrink:0; }
+.attachment-preview-body { flex:1; min-height:0; overflow:auto; scrollbar-gutter:stable; padding:16px; background:#f2f7f7; }
+.attachment-preview-body > img { width:100%; height:100%; object-fit:contain; display:block; }
+.attachment-preview-dialog footer { border-top:1px solid #d7e2e8; font-size:12px; color:#526873; flex-wrap:wrap; }
+.attachment-pdf-preview { display:flex; flex-direction:column; min-height:100%; height:100%; gap:8px; }
+.attachment-pdf-preview iframe { border:0; width:100%; flex:1; min-height:220px; background:white; }
+.attachment-pdf-preview p { font-size:13px; margin:0; overflow-wrap:anywhere; }
+@media(max-width:750px) { .attachment-gallery { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .attachment-card { padding:10px; } .attachment-thumbnail { height:126px; } .attachment-card-actions { flex-wrap:wrap; } .attachment-card-actions > * { min-height:44px; padding:8px; } .attachment-preview-dialog { width:calc(100vw - 16px); max-width:calc(100vw - 16px); height:calc(100dvh - 16px); max-height:calc(100dvh - 16px); } .attachment-preview-dialog header, .attachment-preview-dialog footer { padding:12px; } .attachment-preview-body { padding:10px; } .attachment-pending-card { gap:8px; } }
+@media(max-width:350px) { .attachment-gallery { grid-template-columns:1fr; } }
+
+.job-photos, .expense-receipts { scroll-margin-top:76px; }
+.job-photos .customer-error, .expense-receipts .customer-error { white-space:pre-wrap; overflow-wrap:anywhere; }
+@media(max-width:750px) { .expense-receipt-upload > button { flex:1 1 140px; justify-content:center; min-height:44px; } }
+
+.job-photos .customer-form-heading .text-button, .expense-receipts .customer-form-heading .text-button { flex-shrink:0; white-space:nowrap; min-height:44px; }
+
+.attachment-pdf-pages { width:100%; min-width:0; }
+.attachment-pdf-pages canvas { max-width:100%; margin:0 auto; background:white; }
+.attachment-pdf-pagination { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-bottom:12px; font-size:13px; }
+.attachment-pdf-pagination button { min-height:44px; }
+
+@media(max-width:750px) { .attachment-card:only-child { grid-column:1 / -1; } }
+
+.attachment-pending-card > .text-button { min-height:44px; flex-shrink:0; }
+@media(max-width:750px) { .job-photo-controls > button { min-height:44px; } }
+
+.attachment-pdf-preview p a { color:#117b79; text-underline-offset:3px; }
+.job-photos .customer-form-heading h2 { min-width:0; overflow-wrap:anywhere; }

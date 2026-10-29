@@ -1,0 +1,16 @@
+.job-photos { scroll-margin-top: 20px; }
+.job-photos button:disabled { opacity: .5; cursor: not-allowed; }
+.job-photo-controls { display: flex; flex-wrap: wrap; gap: 12px; }
+.job-photo-controls .job-photo-camera { display: none; }
+.job-photo-pending, .job-photo-gallery { list-style: none; padding: 0; }
+.job-photo-pending li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; }
+.job-photo-pending span, .job-photo-gallery strong { overflow-wrap: anywhere; min-width: 0; }
+.job-photos .customer-error { white-space: pre-wrap; overflow-wrap: anywhere; }
+.job-photo-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr)); gap: 16px; }
+.job-photo-gallery li { display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--border); border-radius: 12px; padding: 12px; min-width: 0; }
+.job-photo-gallery img { width: 100%; height: 180px; object-fit: contain; border-radius: 8px; background: #f2f6f7; }
+.job-photo-gallery small { color: var(--muted); overflow-wrap: anywhere; }
+@media (max-width: 750px) {
+  .job-photo-controls .job-photo-camera { display: inline-flex; }
+  .job-photo-controls > button { flex: 1 1 140px; justify-content: center; }
+}

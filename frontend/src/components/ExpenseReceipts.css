@@ -1,0 +1,16 @@
+.expense-receipts { margin-bottom: 24px; }
+.expense-receipts button:disabled { opacity: .5; cursor: not-allowed; }
+.expense-receipts h2 { overflow-wrap: anywhere; }
+.expense-receipt-upload { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; margin: 16px 0; }
+.expense-receipt-upload label { display: grid; gap: 8px; min-width: 0; }
+.expense-receipt-upload input { max-width: 100%; box-sizing: border-box; }
+.expense-receipt-list { list-style: none; margin: 16px 0 0; padding: 0; }
+.expense-receipt-list li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-top: 1px solid #d5e0e3; }
+.expense-receipt-list li > div:first-child { flex: 1 1 240px; min-width: 0; }
+.expense-receipt-list strong { display: block; overflow-wrap: anywhere; }
+.expense-receipt-list small { display: block; margin-top: 6px; }
+.expense-receipt-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.expense-receipt-upload .expense-receipt-camera { display: none; }
+.expense-receipt-selected { overflow-wrap: anywhere; }
+@media (max-width: 750px) { .expense-receipt-upload .expense-receipt-camera { display: inline-flex; } }
+@media (max-width: 600px) { .expense-receipt-upload label { width: 100%; } }

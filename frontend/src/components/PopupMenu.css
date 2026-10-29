@@ -1,0 +1,19 @@
+.app-popup-menu { position:fixed; z-index:1500; width:min(220px, calc(100vw - 16px)); box-sizing:border-box; padding:6px; border:1px solid #d7e2e8; border-radius:12px; background:#fff; box-shadow:0 8px 28px #173c4e24; max-height:360px; overflow-y:auto; overscroll-behavior:contain; color:#1d3340; }
+.app-popup-menu .app-menu-item { display:flex; align-items:center; gap:10px; width:100%; min-height:44px; padding:10px 12px; border:0; border-radius:7px; background:transparent; color:#243d48; font:inherit; font-size:14px; text-align:left; cursor:pointer; }
+.app-popup-menu .app-menu-item:hover, .app-popup-menu .app-menu-item:focus-visible { background:#edf6f5; outline:none; }
+.app-popup-menu .app-menu-item[aria-checked="true"] { background:#e0f4ee; color:#126f68; }
+.app-popup-menu .app-menu-item:focus-visible { box-shadow:inset 0 0 0 2px #117b79; }
+.app-popup-menu .app-menu-item.is-danger { color:#bf3e49; }
+.app-popup-menu .app-menu-item:disabled { opacity:.5; cursor:default; }
+.app-menu-icon { display:inline-flex; align-items:center; justify-content:center; width:18px; flex:0 0 18px; }
+.app-menu-icon svg { width:18px; height:18px; }
+.app-menu-check { margin-left:auto; color:#117b79; font-weight:700; }
+.app-select-trigger { display:flex; align-items:center; justify-content:space-between; gap:12px; height:44px; min-width:160px; padding:8px 12px; border:1px solid #d7e2e8; border-radius:8px; background:#fff; color:#1d3340; font:inherit; font-size:14px; text-align:left; cursor:pointer; }
+.app-select-trigger svg { width:16px; height:16px; flex-shrink:0; }
+.app-select-trigger:focus-visible, .app-action-trigger:focus-visible { outline:3px solid #81d5cd; outline-offset:2px; }
+.app-action-trigger { display:inline-flex; justify-content:center; align-items:center; width:28px; height:28px; padding:0; border:0; border-radius:6px; background:transparent; color:#0c354c; font:inherit; font-size:23px; cursor:pointer; position:relative; flex-shrink:0; }
+.app-action-trigger::after { content:''; position:absolute; inset:-8px; }
+.app-action-trigger:hover, .app-action-trigger[aria-expanded="true"] { background:#edf6f5; color:#117b79; }
+.list-pagination .app-select-trigger { min-width:78px; height:38px; font-size:13px; }
+.app-status-dot { width:7px; height:7px; border-radius:50%; background:var(--status-color); }
+@media(max-width:750px) { .list-filter-fields .app-select-trigger { min-width:0; width:100%; font-size:16px; } .list-pagination .app-select-trigger { height:44px; } }

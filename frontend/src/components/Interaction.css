@@ -1,0 +1,18 @@
+.operation-notice { position:fixed; z-index:2000; top:20px; right:24px; display:flex; align-items:center; gap:12px; max-width:min(500px,calc(100vw - 32px)); box-sizing:border-box; padding:14px 16px; border:1px solid #b5ddd3; border-radius:12px; background:#e6f5ef; color:#126d65; box-shadow:0 8px 24px #173c4e24; font-size:14px; line-height:1.5; }
+.operation-notice > div { min-width:0; overflow-wrap:anywhere; }
+.operation-notice.is-error { color:#a52e3d; background:#fff2f3; border-color:#efc7cd; }
+.operation-notice.is-pending { background:#edf5f8; color:#174b61; border-color:#c5dce6; }
+.operation-notice button { flex-shrink:0; border:0; padding:6px; border-radius:6px; background:transparent; color:inherit; font:inherit; cursor:pointer; }
+.operation-notice button:hover { background:#ffffff99; }
+.interaction-dialog { width:min(420px,calc(100vw - 32px)); box-sizing:border-box; padding:24px; border:1px solid #d7e2e8; border-radius:16px; color:#0c354c; box-shadow:0 20px 60px #173c4e33; }
+.interaction-dialog::backdrop { background:#0c354c66; }
+.interaction-dialog h2 { margin:0 0 12px; font-size:21px; }
+.interaction-dialog p { margin:0; font-size:14px; line-height:1.6; color:#526873; }
+.interaction-dialog-actions { display:flex; justify-content:flex-end; flex-wrap:wrap; gap:12px; margin-top:24px; }
+.interaction-dialog-actions button { min-height:44px; font-size:14px; }
+.field-error { display:block; width:100%; color:#b33544; font-size:12px; line-height:1.5; margin-top:4px; }
+.interaction-form-fields { display:contents; border:0; padding:0; margin:0; min-width:0; }
+.operation-notice { margin:0; left:auto; bottom:auto; }
+[aria-invalid="true"] { border-color:#c74352 !important; }
+.customer-success { background:#e6f5ef; color:#126d65; border:1px solid #b5ddd3; border-radius:10px; padding:12px 16px; font-size:14px; }
+@media(max-width:750px) { .operation-notice { top:12px; right:12px; max-width:calc(100vw - 24px); } .interaction-dialog { padding:20px; } .interaction-dialog-actions button { flex:1; } }

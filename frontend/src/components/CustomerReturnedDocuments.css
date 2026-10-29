@@ -1,0 +1,7 @@
+.customer-returned-documents { margin-top: 20px; min-width: 0; }
+.customer-returned-documents h2, .customer-returned-documents p { overflow-wrap: anywhere; }
+.customer-returned-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.customer-returned-documents button:disabled { opacity: .5; cursor: not-allowed; }
+@media (max-width: 750px) {
+  .customer-returned-controls > button { flex: 1 1 140px; justify-content: center; min-height: 44px; }
+}

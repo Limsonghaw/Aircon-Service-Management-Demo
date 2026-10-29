@@ -1,0 +1,10 @@
+/* Keep layout dimensions while data/closed-panel layout settles. Errors and retry stay visible. */
+[data-list-restoring="true"] :is(.customers-table-wrap, .customers-mobile-list, .jobs-table-wrap, .jobs-mobile-list, .quotes-table-wrap, .quotes-mobile-list, .invoices-table-wrap, .invoices-mobile-list, .expenses-table-wrap, .expenses-mobile-list, .list-pagination) { visibility: hidden; }
+[data-list-path] { overflow-anchor: none; }
+.list-return-notice {
+  position: fixed; z-index: 40; top: 76px; left: 50%; transform: translateX(-50%);
+  max-width: calc(100vw - 32px); padding: 10px 16px; border: 1px solid #cce5e2;
+  border-radius: 10px; color: #0e7475; background: #f4fbfa;
+  box-shadow: 0 4px 16px #123a4b14; font-size: 14px; line-height: 1.5;
+}
+@media (max-width: 760px) { .list-return-notice { top: 64px; width: max-content; font-size: 13px; } }

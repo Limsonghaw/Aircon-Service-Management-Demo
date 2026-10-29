@@ -1,0 +1,12 @@
+.pdf-item-import { border: 1px solid #bdd6de; border-radius: 12px; padding: 16px; margin: 12px 0 20px; min-width: 0; }
+.pdf-item-import p { margin: 10px 0; }
+.pdf-reference-name { overflow-wrap: anywhere; }
+.pdf-import-row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(90px, 1fr) minmax(110px, 1fr); gap: 12px; border-top: 1px solid #dce5e9; padding: 12px 0; }
+.pdf-import-row label { display: grid; align-content: start; gap: 6px; min-width: 0; }
+.pdf-import-row input, .pdf-import-row textarea { width: 100%; min-width: 0; box-sizing: border-box; min-height: 42px; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; background: white; color: #1d3340; font: inherit; }
+.pdf-item-import > div > label { display: flex; align-items: start; gap: 8px; margin: 16px 0; }
+.pdf-item-import > div > label input { flex: 0 0 auto; margin-top: 4px; }
+.pdf-import-row p { grid-column: 1 / -1; }
+.pdf-import-row textarea { min-height: 90px; }
+.invoice-import-fields { display: contents; }
+@media (max-width: 600px) { .pdf-import-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .pdf-import-row label:first-child { grid-column: 1 / -1; } }

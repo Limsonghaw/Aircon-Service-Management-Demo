@@ -1,0 +1,14 @@
+{
+  "ReleasePath": ".local-deploy/releases",
+  "Environment": {
+    "ASPNETCORE_ENVIRONMENT": "LocalTesting",
+    "ASPNETCORE_URLS": "http://localhost:5080",
+    "AllowedHosts": "localhost;127.0.0.1",
+    "Supabase__Enabled": "false",
+    "Supabase__Url": "",
+    "Supabase__ServiceRoleKey": "",
+    "Deployment__DataTier": "test",
+    "DataProtection__KeyPath": ".local-deploy/keys",
+    "PLAYWRIGHT_BROWSERS_PATH": ""
+  }
+}

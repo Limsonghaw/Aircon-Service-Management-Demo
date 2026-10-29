@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ShengHengAircon.Api.csproj" />
+  <Folder Name="/tests/">
+    <Project Path="tests/ShengHengAircon.Api.Tests/ShengHengAircon.Api.Tests.csproj" />
+  </Folder>
+</Solution>

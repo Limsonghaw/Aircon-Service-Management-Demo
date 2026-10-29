@@ -1,0 +1,61 @@
+# .gitignore 告诉 Git 跳过可以重新生成的文件，以及只应保留在本机的配置和资料。这些文件在本机仍然会正常更新。
+# .gitignore tells Git to ignore files that can be regenerated, as well as settings and data that should stay on your computer. These files will still update normally on your computer.
+# =========================
+# Environment / Secrets
+# =========================
+
+.env
+.env.*
+!.env.example
+deploy/local.settings.json
+.local-deploy/
+
+# =========================
+# Frontend - React / Vite
+# =========================
+
+node_modules/
+dist/
+.vite/
+
+# =========================
+# Backend - .NET
+# =========================
+
+bin/
+obj/
+
+# =========================
+# IDE / Editor
+# =========================
+
+.vs/
+.vscode/
+.idea/
+
+# =========================
+# Operating System
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+# =========================
+# Supabase local files
+# =========================
+
+supabase/.branches/
+supabase/.temp/
+
+# =========================
+# Generated Output / Temporary Files
+# =========================
+
+/output/
+/tmp/

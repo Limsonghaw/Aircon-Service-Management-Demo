@@ -1,0 +1,7 @@
+.job-po-documents { margin-top: 20px; min-width: 0; }
+.job-po-documents h2, .job-po-documents p { overflow-wrap: anywhere; }
+.job-po-controls { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.job-po-documents button:disabled { opacity: .5; cursor: not-allowed; }
+@media (max-width: 750px) {
+  .job-po-controls > button { flex: 1 1 140px; justify-content: center; min-height: 44px; }
+}

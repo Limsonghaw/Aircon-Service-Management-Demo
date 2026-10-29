@@ -1,0 +1,46 @@
+.work-calendar .calendar-layout { grid-template-columns: minmax(0, 1fr); }
+.work-calendar .calendar-controls { display:flex; align-items:end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:16px; }
+.work-calendar .calendar-controls .calendar-toolbar, .work-calendar .calendar-controls .calendar-filters { margin-bottom:0; }
+.work-calendar .calendar-filters { display:flex; flex-wrap:wrap; align-items:end; gap:12px; margin-bottom:16px; }
+.work-calendar .calendar-filters > div { display:grid; gap:6px; width:180px; min-width:0; font-size:13px; color:#526873; }
+.work-calendar .calendar-interaction-hint p { margin:0; line-height:1.5; }
+.work-calendar .calendar-grid button { min-height:76px; display:flex; flex-direction:column; align-items:flex-start; gap:6px; padding:8px; min-width:0; }
+.work-calendar .calendar-grid button.today span { display:block; width:auto; height:auto; border-radius:0; background:transparent; color:inherit; }
+.work-calendar .calendar-grid button.today > .calendar-day-number { width:28px; height:28px; }
+.work-calendar .calendar-grid button.today > .calendar-job-count { display:flex; width:fit-content; border-radius:5px; background:#e1f3ee; color:#126d65; }
+.work-calendar .calendar-grid button .calendar-day-number { display:inline-grid; place-items:center; width:28px; height:28px; flex-shrink:0; font-weight:600; }
+.work-calendar .calendar-grid button.today .calendar-day-number { display:inline-grid; border-radius:50%; background:#173c4e; color:white; }
+.work-calendar .calendar-grid button .calendar-job-count { display:flex; flex-wrap:wrap; gap:3px; width:fit-content; max-width:100%; padding:3px 6px; border-radius:5px; font-size:12px; line-height:1.3; background:#e1f3ee; color:#126d65; box-sizing:border-box; }
+.work-calendar .calendar-grid button.selected { background:#eff9f6; box-shadow:inset 0 0 0 2px #117b79; }
+.work-calendar .calendar-grid button:focus-visible { outline-offset:-4px; outline:3px solid #5bb8ae; }
+.work-calendar .calendar-legend { display:flex; flex-wrap:wrap; gap:12px; margin-top:14px; color:#526873; font-size:12px; }
+.work-calendar .calendar-legend > span { display:flex; align-items:center; gap:6px; }
+.calendar-today-marker { width:12px; height:12px; background:#173c4e; border-radius:50%; }
+.calendar-selected-marker { width:12px; height:12px; border:2px solid #117b79; box-sizing:border-box; border-radius:2px; }
+.work-calendar .calendar-agenda { scroll-margin-top:80px; min-height:240px; }
+.work-calendar .calendar-agenda h2 { margin:0 0 18px; font-size:20px; line-height:1.4; }
+.work-calendar .agenda-list { gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); }
+.work-calendar .agenda-list .calendar-job-card { padding:16px; border:1px solid #dce7e9; border-radius:10px; min-width:0; }
+.calendar-job-heading { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:10px; }
+.calendar-job-heading strong { overflow-wrap:anywhere; min-width:0; }
+.calendar-job-card small { display:block; color:#526873; margin-top:8px; line-height:1.6; overflow-wrap:anywhere; }
+.calendar-job-actions { display:flex; gap:10px; margin-top:14px; }
+.calendar-job-actions button { font:inherit; font-size:14px; cursor:pointer; }
+.calendar-load-state { padding:12px 16px; background:#edf5f8; color:#173c4e; border-radius:8px; }
+@media(max-width:600px) {
+  .work-calendar .page-heading { flex-direction:row; align-items:start; gap:8px; }
+  .work-calendar .page-heading > div { min-width:0; }
+  .work-calendar .page-heading > button { flex-shrink:0; padding:8px; font-size:12px; }
+  .work-calendar .page-heading p { font-size:13px; }
+  .work-calendar .calendar-keyboard-hint { display:none; }
+  .work-calendar .calendar-controls, .work-calendar .calendar-controls .calendar-filters { width:100%; }
+  .work-calendar .calendar-filters > div { flex:1 1 120px; width:auto; }
+  .work-calendar .calendar-panel { padding:8px; }
+  .work-calendar .calendar-grid button { min-height:66px; padding:5px 3px; gap:4px; font-size:13px; }
+  .work-calendar .calendar-grid button .calendar-day-number { width:24px; height:24px; }
+  .work-calendar .calendar-grid button.today > .calendar-day-number { width:24px; height:24px; }
+  .work-calendar .calendar-grid button .calendar-job-count { flex-direction:column; align-items:center; gap:0; padding:2px 3px; font-size:11px; line-height:1.3; }
+  .work-calendar .calendar-count-unit { font-size:10px; }
+  .work-calendar .calendar-job-actions button { flex:1; width:auto; }
+  .work-calendar .calendar-agenda { scroll-margin-top:20px; min-height:calc(100dvh - 120px); }
+}
