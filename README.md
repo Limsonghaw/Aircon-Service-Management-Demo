@@ -152,6 +152,30 @@ Inspect recorded actions by keyword, action type, category and date range to tra
 
 ![Activity logs](docs/screenshots/activity-logs.jpg)
 
+## Run the Portfolio Preview
+
+For a quick UI walkthrough, run the local read-only preview. It serves the built React frontend with fictional mock API responses. No .NET backend, Supabase project, credentials or database connection is required.
+
+From a terminal:
+
+```powershell
+git clone https://github.com/Limsonghaw/Aircon-Service-Management-Demo.git
+cd Aircon-Service-Management-Demo
+cd frontend
+npm ci
+npm run build
+cd ..
+node scripts/portfolio-demo.cjs
+```
+
+If you already downloaded the repository, start from its root and skip the clone commands. Use a Node.js version compatible with the checked-in frontend dependencies.
+
+Open **http://127.0.0.1:5199**. The preview automatically simulates a Demo Manager with the Owner role; no email or password is needed. Keep the terminal open and press **Ctrl+C** to stop it. If port 5199 is already in use, stop the previous preview first.
+
+Browse the dashboard, jobs, customers, quotations, invoices, expenses, calendar and activity logs. The fixtures are a fixed snapshot dated October 29, 2026, so the current day's dashboard and calendar may differ from the screenshots. Team records and uploaded attachments are not populated. Create, update, delete, upload, authentication and PDF generation workflows require the real backend and are not supported by this read-only preview; changes cannot be saved.
+
+After changing frontend code, run `npm run build` again from `frontend/` and refresh the browser. For full application development with the ASP.NET Core API, follow the setup below.
+
 ## Installation / Local Setup
 
 Prerequisites: .NET SDK 10 and a Node.js version compatible with the Vite version in `frontend/package.json` (see the checked-in lockfile for exact dependencies).
