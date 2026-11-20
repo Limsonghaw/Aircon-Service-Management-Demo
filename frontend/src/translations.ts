@@ -823,6 +823,8 @@ export const english: Record<string, string> = {
   "金额：从高到低": "Amount: High to Low",
   "金额：从低到高": "Amount: Low to High",
   "当前账号没有权限查看这些资料。请联系老板或管理员。": "Your account cannot view this data. Contact the owner or administrator.",
+  "正在唤醒服务器，约需 1 分钟…": "Waking up the server, about 1 minute…",
+  "服务器暂时没有回应，请稍后重试。": "The server did not respond. Please try again later.",
   "资料暂时无法加载，请稍后重试。": "Data is temporarily unavailable. Please retry later.",
   "请对照原件核对项目、数量及单价。": "Check items, quantities and prices against the original.",
   "项目跨行数值不明确，请人工核对。": "Multiline item values are unclear. Check manually.",

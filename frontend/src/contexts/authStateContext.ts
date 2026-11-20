@@ -8,7 +8,7 @@ export type AuthContextValue = {
   login: (email: string, password: string) => Promise<void>
   logout: () => Promise<void>
   reauthenticate: () => void
-  session: { isLoading: boolean; loaded: boolean; failure: LoadFailure | null; retry: () => void }
+  session: { isLoading: boolean; isWaking: boolean; loaded: boolean; failure: LoadFailure | null; retry: () => void }
 }
 
 export const AuthStateContext = createContext<AuthContextValue | null>(null)

@@ -1,4 +1,4 @@
-import { safeApiMessage } from './ApiValidationError'
+import { ApiValidationError, safeApiMessage } from './ApiValidationError'
 export type UserRole = 'owner' | 'admin' | 'employee'
 export type AuthUser = {
   id: string
@@ -16,10 +16,10 @@ async function errorMessage(response: Response, fallback: string) {
   }
 }
 
-export async function getCurrentUser(): Promise<AuthUser | null> {
-  const response = await fetch('/api/auth/me')
+export async function getCurrentUser(signal?: AbortSignal): Promise<AuthUser | null> {
+  const response = await fetch('/api/auth/me', { signal })
   if (response.status === 401) return null
-  if (!response.ok) throw new Error(await errorMessage(response, '无法确认登录状态。'))
+  if (!response.ok) throw new ApiValidationError('无法确认登录状态。', {}, response.status)
   return response.json() as Promise<AuthUser>
 }
 
