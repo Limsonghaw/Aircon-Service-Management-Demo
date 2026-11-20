@@ -3,6 +3,20 @@ const hopByHopHeaders = [
   'te', 'trailer', 'transfer-encoding', 'upgrade',
 ]
 
+const clientIpHeaders = new Set([
+  'forwarded', 'x-real-ip', 'cf-connecting-ip', 'cf-connecting-ipv6',
+  'true-client-ip', 'x-client-ip', 'x-cluster-client-ip',
+])
+
+function isIpAddress(value: string): boolean {
+  if (value.includes(':')) {
+    // Bracketed URL host parsing validates IPv6, including embedded IPv4.
+    return /^[\da-f:.]+$/i.test(value) && URL.parse(`http://[${value}]`) !== null
+  }
+  return /^(?:0|[1-9]\d{0,2})(?:\.(?:0|[1-9]\d{0,2})){3}$/.test(value)
+    && value.split('.').every(octet => Number(octet) <= 255)
+}
+
 function endToEndHeaders(source: Headers): Headers {
   const headers = new Headers(source)
   // Connection can nominate additional headers for this hop only.
@@ -47,7 +61,15 @@ export async function proxyApiRequest(
     return new Response('Invalid API request.', { status: 400 })
   }
 
+  const clientIp = request.headers.get('cf-connecting-ip')?.trim()
   const headers = endToEndHeaders(request.headers)
+  request.headers.forEach((_value, name) => {
+    if (name.startsWith('x-forwarded-') || clientIpHeaders.has(name)) headers.delete(name)
+  })
+  if (clientIp && isIpAddress(clientIp)) {
+    headers.set('x-forwarded-for', clientIp)
+    headers.set('x-forwarded-proto', 'https')
+  }
   headers.set('host', origin.hostname)
 
   const controller = new AbortController()

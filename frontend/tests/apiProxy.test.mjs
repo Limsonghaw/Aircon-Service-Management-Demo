@@ -23,6 +23,7 @@ test('streams the POST body and forwards end-to-end request headers', async () =
     body: '{"example":true}',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: 'Bearer example',
       Cookie: 'session=example',
       Host: 'demo.pages.dev',
       'X-Forwarded-Host': 'elsewhere.example',
@@ -43,8 +44,66 @@ test('streams the POST body and forwards end-to-end request headers', async () =
   assert.equal(init.headers.get('host'), 'backend.example')
   assert.ok(init.headers.get('cookie') === 'session=example', 'Cookie is forwarded')
   assert.equal(init.headers.get('content-type'), 'application/json')
-  for (const name of ['connection', 'x-hop', 'keep-alive', 'proxy-authorization']) {
+  assert.equal(init.headers.get('authorization'), 'Bearer example')
+  for (const name of ['connection', 'x-hop', 'keep-alive', 'proxy-authorization', 'x-forwarded-host']) {
     assert.equal(init.headers.has(name), false)
+  }
+})
+
+const spoofedHeaders = {
+  'X-Forwarded-For': '192.0.2.1',
+  'x-FoRwArDeD-hOsT': 'elsewhere.example',
+  'X-Forwarded-Proto': 'http',
+  'X-Forwarded-Port': '81',
+  'X-Forwarded-Custom': 'remove',
+  Forwarded: 'for=192.0.2.1',
+  'X-Real-IP': '192.0.2.1',
+  'True-Client-IP': '192.0.2.1',
+  'CF-Connecting-IPv6': '2001:db8::1',
+  'X-Client-IP': '192.0.2.1',
+  'X-Cluster-Client-IP': '192.0.2.1',
+}
+
+test('strips spoofed forwarding headers when CF-Connecting-IP is absent', async () => {
+  const request = new Request(health.url, { headers: spoofedHeaders })
+  const fetchUpstream = mock.fn(async () => new Response('ok'))
+  await proxyApiRequest(request, origin, fetchUpstream)
+  const [, { headers }] = fetchUpstream.mock.calls[0].arguments
+  for (const name of Object.keys(spoofedHeaders)) {
+    assert.equal(headers.has(name), false, name)
+  }
+})
+
+test('sets only the trusted forwarding pair for valid Cloudflare IPv4 and IPv6 addresses', async () => {
+  for (const ip of ['203.0.113.10', '2001:db8::10', '::ffff:203.0.113.10']) {
+    const request = new Request(health.url, {
+      headers: { ...spoofedHeaders, 'CF-Connecting-IP': ` ${ip} ` },
+    })
+    const fetchUpstream = mock.fn(async () => new Response('ok'))
+    await proxyApiRequest(request, origin, fetchUpstream)
+    const [, { headers }] = fetchUpstream.mock.calls[0].arguments
+    assert.equal(headers.get('x-forwarded-for'), ip)
+    assert.equal(headers.get('x-forwarded-proto'), 'https')
+    assert.equal(headers.has('cf-connecting-ip'), false)
+    for (const name of Object.keys(spoofedHeaders)) {
+      if (name === 'X-Forwarded-For' || name === 'X-Forwarded-Proto') continue
+      assert.equal(headers.has(name), false, name)
+    }
+  }
+})
+
+test('omits the forwarding pair when CF-Connecting-IP is invalid', async () => {
+  for (const ip of ['1.2.3.4, 5.6.7.8', 'not-an-ip', '1.2.3.256', '1.2.3',
+    '203.0. 113.10', '2001:db8:::10', '[2001:db8::10]', 'fe80::1%eth0']) {
+    const request = new Request(health.url, {
+      headers: { ...spoofedHeaders, 'CF-Connecting-IP': ip },
+    })
+    const fetchUpstream = mock.fn(async () => new Response('ok'))
+    await proxyApiRequest(request, origin, fetchUpstream)
+    const [, { headers }] = fetchUpstream.mock.calls[0].arguments
+    for (const name of ['x-forwarded-for', 'x-forwarded-proto', 'cf-connecting-ip']) {
+      assert.equal(headers.has(name), false, `${name} for ${ip}`)
+    }
   }
 })
 
