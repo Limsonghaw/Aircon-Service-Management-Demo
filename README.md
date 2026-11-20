@@ -2,6 +2,14 @@
 
 **Full-Stack Web Application | React · TypeScript · ASP.NET Core · Supabase**
 
+## Live demo
+
+[Open the live demo](https://shenghengaircondemo.pages.dev/)
+
+Demo login: `demo@gmail.com` / `123456`
+
+First load may take ~1 minute (free hosting wakes up from sleep). Fictional demo data.
+
 ## Project Overview
 
 This project is a portfolio demonstration of an internal air-conditioning service management system. The demo configuration uses fictional business information.
@@ -220,7 +228,7 @@ Validation commands:
 
 ## Demo Environment
 
-The screenshots use synthetic local fixtures and do not require Supabase access. The application itself uses the ASP.NET Core backend and requires a separately configured, isolated Supabase demo project for data-backed workflows. Mock screenshots do not demonstrate database persistence or validate the complete PDF and authentication workflows. No hosted demo or credentials are included in this repository.
+The screenshots use synthetic local fixtures and do not require Supabase access. The application itself uses the ASP.NET Core backend and requires a separately configured, isolated Supabase demo project for data-backed workflows. Mock screenshots do not demonstrate database persistence or validate the complete PDF and authentication workflows. See the [Live demo](#live-demo) section above for the hosted demo and its fictional-data login.
 
 Use only fictional business information in demonstrations. Keep production databases and credentials separate from local development and portfolio testing.
 
