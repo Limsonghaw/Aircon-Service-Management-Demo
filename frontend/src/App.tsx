@@ -60,6 +60,11 @@ function App() {
       ? '客户详情'
     : (pageTitles[location.pathname] ?? '总览')
 
+  if (session.isWaking) return <main className="auth-loading">
+    <div className="data-state data-state-loading" role="status" aria-live="polite">
+      <span className="state-spinner" aria-hidden="true" />{t("正在唤醒服务器，约需 1 分钟…")}
+    </div>
+  </main>
   if (loading) return <main className="auth-loading" aria-live="polite">{t("正在确认登录状态…")}</main>
   if (!user && session.failure) return <main className="auth-loading"><LoadState state={session} label={t("登录状态")} /></main>
   if (!user) return <LoginPage />
