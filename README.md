@@ -226,6 +226,24 @@ Validation commands:
  npm run lint
 ```
 
+## Deploying the frontend to Cloudflare Pages (with Functions)
+
+The Pages project `shenghengaircondemo` uses direct uploads and has no GitHub connection. Run these commands from `frontend/` so Wrangler picks up `frontend/functions/` alongside the Vite build in `dist/`.
+
+```sh
+npm ci
+npm run build
+npx wrangler pages deploy dist --branch api-proxy-preview
+```
+
+Open the preview URL and verify `/api/health`, login, and that the session persists after a page refresh. Then deploy from the project's production branch with `npx wrangler pages deploy dist`.
+
+Keep the build free of a top-level `404.html` and catch-all `_redirects` rules so Pages' default SPA fallback serves `index.html` when users refresh an unknown path.
+
+The `[vars]` section in `frontend/wrangler.toml` sets `API_ORIGIN` to the public Render backend URL. If deploying without that file, set the same Pages environment variable for the target environment. The URL is public configuration.
+
+With `pages_build_output_dir` set, Wrangler configuration becomes the source of truth for overlapping Pages dashboard settings on deploy. Compare the file with the project's settings before the first preview upload. Deploying requires permission to edit this Pages project (for example, **Account → Cloudflare Pages → Edit**) and an authenticated Wrangler session or a scoped API token. Keep tokens out of Git and chat. [Cloudflare Pages configuration](https://developers.cloudflare.com/pages/functions/wrangler-configuration/)
+
 ## Demo Environment
 
 The screenshots use synthetic local fixtures and do not require Supabase access. The application itself uses the ASP.NET Core backend and requires a separately configured, isolated Supabase demo project for data-backed workflows. Mock screenshots do not demonstrate database persistence or validate the complete PDF and authentication workflows. See the [Live demo](#live-demo) section above for the hosted demo and its fictional-data login.
