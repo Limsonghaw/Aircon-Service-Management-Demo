@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "_meta": "Structure only. Fictional demo rows will be added after an approved export. Business dates use relative tokens.",
+  "customers": [],
+  "teams": [],
+  "employees": [],
+  "jobs": [],
+  "quotes": [],
+  "quoteItems": [],
+  "invoices": [],
+  "expenses": [],
+  "userProfileLinks": {}
+}

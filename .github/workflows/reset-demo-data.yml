@@ -1,0 +1,29 @@
+name: Reset demo data
+
+on:
+  # Intended cron after separate approval: 0 20 * * * (04:00 Malaysia time)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: reset-demo-data
+  cancel-in-progress: false
+
+jobs:
+  reset:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+      - run: node scripts/reset-demo-data.mjs
+        env:
+          DEMO_SUPABASE_URL: ${{ secrets.DEMO_SUPABASE_URL }}
+          DEMO_SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.DEMO_SUPABASE_SERVICE_ROLE_KEY }}
+          DEMO_ALLOWED_PROJECT_REF: ${{ secrets.DEMO_ALLOWED_PROJECT_REF }}
+          DEMO_ALLOWED_USER_EMAILS: ${{ secrets.DEMO_ALLOWED_USER_EMAILS }}
