@@ -1,0 +1,6 @@
+name = "shenghengaircondemo"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-11-16"
+
+[vars]
+API_ORIGIN = "https://aircon-service-management-demo.onrender.com"
