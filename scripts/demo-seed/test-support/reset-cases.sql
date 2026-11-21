@@ -163,6 +163,8 @@ create function pg_temp.golden_seed() returns jsonb language sql immutable as $$
     select $seed$__GOLDEN__$seed$::jsonb
 $$;
 
+__SAFEUPDATE__
+
 -- jsonb_populate_record ignores unknown keys, so reject them explicitly here.
 do $$
 declare
