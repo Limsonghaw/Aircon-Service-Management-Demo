@@ -1,20 +1,62 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { isColdStartError, waitForBackend, withRequestTimeout } from '../src/utils/coldStart.ts'
+import { getCurrentUser } from '../src/services/authApi.ts'
 
-test('only network errors, timeouts, and gateway failures trigger waking', () => {
+test('network errors, timeouts, rate limits, HTML and gateway failures trigger waking', () => {
   for (const error of [
     new TypeError('Failed to fetch'),
     new Error('Failed to fetch'),
     new DOMException('Timed out', 'TimeoutError'),
-    ...[502, 503, 504].map(status => ({ status })),
+    ...[429, 502, 503, 504].map(status => ({ status })),
+    { status: 200, responseType: 'html' },
   ]) assert.equal(isColdStartError(error), true)
 
   for (const status of [400, 401, 403, 404, 500]) {
     assert.equal(isColdStartError(Object.assign(new TypeError('Failed to fetch'), { status })), false)
   }
+  for (const status of [401, 403]) {
+    assert.equal(isColdStartError({ status, responseType: 'html' }), false)
+  }
   assert.equal(isColdStartError(new DOMException('Cancelled', 'AbortError')), false)
   assert.equal(isColdStartError(new Error('Unexpected error')), false)
+})
+
+test('current user preserves 429 and 503 status for the waking flow', async t => {
+  for (const status of [429, 503]) {
+    t.mock.method(globalThis, 'fetch', async () => Response.json({ error: 'unavailable' }, { status }))
+    await assert.rejects(getCurrentUser(), error => error.status === status && isColdStartError(error))
+    t.mock.restoreAll()
+  }
+})
+
+test('current user recognizes HTML with or without the correct content type', async t => {
+  for (const [status, contentType] of [[200, 'text/html; charset=utf-8'], [200, 'application/json'], [500, 'text/plain']]) {
+    t.mock.method(globalThis, 'fetch', async () => new Response('<!DOCTYPE html><html>Just a moment…</html>', {
+      status, headers: { 'Content-Type': contentType },
+    }))
+    await assert.rejects(getCurrentUser(), error => error.status === status && isColdStartError(error))
+    t.mock.restoreAll()
+  }
+})
+
+test('current user keeps 401 and 403 out of the waking flow even for HTML', async t => {
+  for (const status of [401, 403]) {
+    t.mock.method(globalThis, 'fetch', async () => new Response('<html>Denied</html>', {
+      status, headers: { 'Content-Type': 'text/html' },
+    }))
+    if (status === 401) assert.equal(await getCurrentUser(), null)
+    else await assert.rejects(getCurrentUser(), error => error.status === 403 && !isColdStartError(error))
+    t.mock.restoreAll()
+  }
+})
+
+test('current user still returns valid JSON and does not classify unrelated JSON errors as cold starts', async t => {
+  t.mock.method(globalThis, 'fetch', async () => Response.json({ id: 'test-user', role: 'owner' }))
+  assert.deepEqual(await getCurrentUser(), { id: 'test-user', role: 'owner' })
+  t.mock.restoreAll()
+  t.mock.method(globalThis, 'fetch', async () => new Response('invalid JSON'))
+  await assert.rejects(getCurrentUser(), error => error instanceof SyntaxError && !isColdStartError(error))
 })
 
 test('health polling retries until healthy', async () => {

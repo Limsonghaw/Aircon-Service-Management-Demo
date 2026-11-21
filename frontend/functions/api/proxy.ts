@@ -93,6 +93,14 @@ export async function proxyApiRequest(
     clearTimeout(timer)
   }
 
+  if (response.status === 429 || response.headers.get('cf-mitigated')?.toLowerCase() === 'challenge') {
+    // Challenge pages are not API responses. Do not forward their HTML or cookies.
+    void response.body?.cancel().catch(() => {})
+    return Response.json({ error: 'upstream_unavailable' }, {
+      status: 503, headers: { 'Cache-Control': 'no-store' },
+    })
+  }
+
   const responseHeaders = endToEndHeaders(response.headers)
   if (responseHeaders.has('set-cookie')) {
     const source = response.headers as Headers & { getAll?: (name: string) => string[] }
