@@ -10,15 +10,38 @@ const migrations = new URL('../../../supabase/migrations/', import.meta.url);
 const here = name => readFileSync(new URL(name, import.meta.url), 'utf8');
 const fixture = expandSeed(JSON.parse(here('../test-fixtures/sample-seed.json')), '2026-11-20');
 const golden = expandSeed(JSON.parse(here('../data.json')), '2026-11-20');
+const safeupdate = process.env.DEMO_TEST_SAFEUPDATE === '1';
 const empty = { version: 1, ...Object.fromEntries(Object.keys(businessTables).map(key => [key, []])), userProfileLinks: {} };
 const cases = here('reset-cases.sql')
   .replace('__FIXTURE__', () => JSON.stringify(fixture))
   .replace('__EMPTY__', () => JSON.stringify(empty))
-  .replace('__GOLDEN__', () => JSON.stringify(golden));
+  .replace('__GOLDEN__', () => JSON.stringify(golden))
+  .replace('__SAFEUPDATE__', () => safeupdate ? "load 'safeupdate'; set safeupdate.enabled = on;" : '');
+const safeupdateRegression = `
+load 'safeupdate';
+set safeupdate.enabled = on;
+begin;
+insert into auth.users(id, email) values ('00000000-0000-4000-8000-000000000101', 'demo@gmail.com');
+do $test$
+begin
+    perform public.reset_demo_data(array['demo@gmail.com'], $seed$${JSON.stringify(golden)}$seed$::jsonb, '2026-11-20');
+    raise exception 'Expected the original migration to fail with safeupdate';
+exception when cardinality_violation then
+    assert sqlerrm = 'DELETE requires a WHERE clause';
+    raise notice 'Reproduced original failure: SQLSTATE %, %', sqlstate, sqlerrm;
+end;
+$test$;
+rollback;
+set safeupdate.enabled = off;
+`;
 const files = [
   ['stub.sql', here('stub.sql')],
   ...readdirSync(migrations).filter(name => name.endsWith('.sql')).sort()
-    .map(name => [name, readFileSync(new URL(name, migrations), 'utf8')]),
+    .flatMap(name => [
+      ...(safeupdate && name === '202611210001_fix_demo_reset_safeupdate.sql'
+        ? [['safeupdate-regression.sql', safeupdateRegression]] : []),
+      [name, readFileSync(new URL(name, migrations), 'utf8')],
+    ]),
   ['reset-cases.sql', cases],
 ];
 
@@ -55,7 +78,7 @@ function testSocket() {
     for (const [name, sql] of files) {
       console.log('Applying ' + name);
       const output = run('psql', [...connect, '-X', '-v', 'ON_ERROR_STOP=1', '-v', 'VERBOSITY=verbose', '-d', database], sql);
-      if (name === 'reset-cases.sql') console.log(output);
+      if (name === 'reset-cases.sql' || name === 'safeupdate-regression.sql') console.log(output);
     }
   } finally {
     run('dropdb', [...connect, database]);

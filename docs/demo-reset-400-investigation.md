@@ -2,6 +2,33 @@
 
 ## Finding
 
+Update: Actions run `44872848019` returned SQLSTATE `21000`,
+`DELETE requires a WHERE clause`. Loading the official `pg-safeupdate` extension
+locally reproduces exactly this error with the original reset function. SQL
+Editor success and API-session failure are consistent with a session-specific
+safeupdate guard. The secret key format is unrelated to this SQL error.
+
+`202611210001_fix_demo_reset_safeupdate.sql` replaces the reset function with the
+same body except that all 15 intentional whole-table DELETE statements have
+`WHERE true`. It leaves safeupdate enabled and preserves the Auth gate,
+transaction, permissions, trigger handling, and seed. Applying this migration
+does not execute a reset. Reverting the function definition does not restore
+data/files deleted by a subsequent reset.
+
+The optional local regression mode requires the official `safeupdate` library
+installed in PostgreSQL's library directory:
+
+```bash
+DEMO_TEST_SAFEUPDATE=1 node scripts/demo-seed/test-support/test-postgres.mjs
+```
+
+It reproduces the old failure before applying the new migration, then verifies
+two successful real-seed resets with safeupdate enabled. The normal command
+continues to work without that optional library. Production verification is
+pending the user's manual SQL application and PR merge.
+
+### Initial investigation (before the diagnostic workflow run)
+
 The reported production HTTP 400 has not been reproduced locally. Its exact cause
 is still unknown because the old runner discarded the Supabase error body.
 No production Supabase requests, secret changes, or workflow reruns were made.
@@ -49,7 +76,7 @@ The PostgreSQL harness prints local RPC results and uses verbose PostgreSQL
 errors (including SQLSTATE) if a query fails. Existing rollback and Auth gates
 remain covered. Node tests also cover malformed responses and secret redaction.
 
-## Limit
+## Initial investigation limit
 
 This validates the repository schema, not the live catalog, production ownership,
 additional rows/triggers, or PostgREST configuration. No database or seed change
