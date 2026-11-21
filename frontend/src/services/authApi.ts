@@ -1,4 +1,4 @@
-import { ApiValidationError, safeApiMessage } from './ApiValidationError'
+import { ApiValidationError, safeApiMessage } from './ApiValidationError.ts'
 export type UserRole = 'owner' | 'admin' | 'employee'
 export type AuthUser = {
   id: string
@@ -19,8 +19,17 @@ async function errorMessage(response: Response, fallback: string) {
 export async function getCurrentUser(signal?: AbortSignal): Promise<AuthUser | null> {
   const response = await fetch('/api/auth/me', { signal })
   if (response.status === 401) return null
+  if (response.status === 403) throw new ApiValidationError('无法确认登录状态。', {}, response.status)
+  const htmlError = () => Object.assign(new Error('服务器暂时返回了 HTML，无法确认登录状态。'), {
+    status: response.status, responseType: 'html',
+  })
+  if (/^(?:text\/html|application\/xhtml\+xml)\b/i.test(response.headers.get('content-type') ?? '')) {
+    throw htmlError()
+  }
+  const body = await response.text()
+  if (/^\s*(?:<!doctype\s+html\b|<html\b|<head\b|<body\b)/i.test(body)) throw htmlError()
   if (!response.ok) throw new ApiValidationError('无法确认登录状态。', {}, response.status)
-  return response.json() as Promise<AuthUser>
+  return JSON.parse(body) as AuthUser
 }
 
 export async function login(email: string, password: string): Promise<AuthUser> {

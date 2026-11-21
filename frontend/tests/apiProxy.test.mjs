@@ -181,9 +181,23 @@ test('passes through upstream redirects without following them', async () => {
 })
 
 test('passes through real upstream 401 and 503 responses', async () => {
-  for (const status of [401, 503]) {
+  for (const status of [401, 403, 503]) {
     const response = await proxyApiRequest(health, origin, async () => new Response('upstream', { status }))
     assert.equal(response.status, status)
     assert.equal(await response.text(), 'upstream')
+  }
+})
+
+test('normalizes upstream 429 and challenge pages to uncached 503 JSON', async () => {
+  for (const [status, challenge] of [[429, false], [429, true], [403, true], [200, true]]) {
+    const headers = new Headers({ 'Content-Type': 'text/html', 'Set-Cookie': 'challenge=test' })
+    if (challenge) headers.set('cf-mitigated', 'challenge')
+    const response = await proxyApiRequest(health, origin, async () => new Response('<html>Just a moment…</html>', { status, headers }))
+    assert.equal(response.status, 503)
+    assert.match(response.headers.get('content-type'), /application\/json/)
+    assert.equal(response.headers.get('cache-control'), 'no-store')
+    assert.equal(response.headers.has('set-cookie'), false)
+    assert.equal(response.headers.has('cf-mitigated'), false)
+    assert.deepEqual(await response.json(), { error: 'upstream_unavailable' })
   }
 })

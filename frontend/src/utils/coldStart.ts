@@ -8,7 +8,9 @@ class RequestTimeout extends DOMException {
 
 export function isColdStartError(error: unknown): boolean {
   if (error && typeof error === 'object' && 'status' in error) {
-    return error.status === 502 || error.status === 503 || error.status === 504
+    if (error.status === 401 || error.status === 403) return false
+    if ('responseType' in error && error.responseType === 'html') return true
+    return error.status === 429 || error.status === 502 || error.status === 503 || error.status === 504
   }
   return error instanceof RequestTimeout ||
     error instanceof TypeError ||
