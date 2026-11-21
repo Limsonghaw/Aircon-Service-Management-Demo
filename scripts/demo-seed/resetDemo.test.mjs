@@ -5,7 +5,7 @@ import { exportSeed } from '../export-demo-seed.mjs';
 import { resetDemo } from '../reset-demo-data.mjs';
 import { businessTables, expandSeed } from './seed.mjs';
 import { businessDate, expandDate, relativeDate } from './shiftDates.mjs';
-import { assertAuthEmails, parseAllowedEmails, readConfig } from './supabase.mjs';
+import { assertAuthEmails, parseAllowedEmails, readConfig, supabaseRequest } from './supabase.mjs';
 
 const env = {
   DEMO_SUPABASE_URL: 'https://abc123.supabase.co',
@@ -19,6 +19,40 @@ const day = '2026-11-20';
 const now = new Date(day + 'T01:00:00Z');
 const json = value => Response.json(value);
 const counts = Object.fromEntries(Object.keys(businessTables).map(key => [key, seed[key].length]));
+
+test('HTTP failures expose only sanitized Supabase message/code', async () => {
+  const request = supabaseRequest(readConfig(env), () => Response.json({
+    code: '23514', message: 'new row violates check constraint "jobs_status_values"',
+    details: 'private-row', hint: 'private-hint', headers: { Authorization: 'private-header' },
+  }, { status: 400, headers: { 'x-private': 'response-secret' } }));
+  await assert.rejects(request('Database reset', '/rest/v1/rpc/reset_demo_data', 'POST', {}), error => {
+    assert.match(error.message, /HTTP 400/);
+    assert.match(error.message, /23514/);
+    assert.match(error.message, /jobs_status_values/);
+    assert.doesNotMatch(error.message, /private|response-secret|Authorization|apikey/);
+    return true;
+  });
+  for (const body of [null, [], { message: 42 }, 'not JSON']) {
+    const bad = supabaseRequest(readConfig(env), () => new Response(
+      typeof body === 'string' ? body : JSON.stringify(body), { status: 400 }));
+    await assert.rejects(bad('Database reset', '/rpc'), /^Error: Database reset failed \(HTTP 400\)$/);
+  }
+  const secret = supabaseRequest(readConfig(env), () => Response.json({
+    code: 'P0001', message: `${env.DEMO_SUPABASE_SERVICE_ROLE_KEY}\nBearer other-secret eyJabc.def.ghi`,
+  }, { status: 400 }));
+  await assert.rejects(secret('Database reset', '/rpc'), error => {
+    assert.doesNotMatch(error.message, /mock-credential|other-secret|eyJabc|\n/);
+    assert.match(error.message, /REDACTED/);
+    return true;
+  });
+  const reflected = supabaseRequest(readConfig(env), () => Response.json({
+    code: 'P0001', message: 'Authorization: Basic private-value',
+  }, { status: 400 }));
+  await assert.rejects(reflected('Database reset', '/rpc'), error => {
+    assert.doesNotMatch(error.message, /Authorization|Basic|private-value/);
+    return true;
+  });
+});
 
 test('Malaysia date changes at 16:00 UTC across a month boundary', () => {
   assert.equal(businessDate(new Date('2024-02-29T15:59:59Z')), '2024-02-29');
