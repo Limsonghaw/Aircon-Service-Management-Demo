@@ -1,7 +1,8 @@
 name: Reset demo data
 
 on:
-  # Intended cron after separate approval: 0 20 * * * (04:00 Malaysia time)
+  schedule:
+    - cron: "0 20 * * *" # 04:00 Malaysia time
   workflow_dispatch:
 
 permissions:
