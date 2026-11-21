@@ -47,7 +47,27 @@ export function supabaseRequest(config, fetcher) {
     } catch {
       throw new Error(operation + ' request failed');
     }
-    if (!response.ok) throw new Error(operation + ' failed (HTTP ' + response.status + ')');
+    if (!response.ok) {
+      // Only expose the API's diagnostic fields, never request/response headers,
+      // payloads, details, hints, or an unstructured response body.
+      const safe = value => typeof value === 'string'
+        ? (/\b(?:authorization|apikey|headers?|cookie|set-cookie)\s*[:=]/i.test(value)
+          ? '[REDACTED header content]' : value).split(config.key).join('[REDACTED]')
+          .replace(/Bearer\s+[^\s"',;]+/gi, '[REDACTED]')
+          .replace(/eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+/g, '[REDACTED]')
+          .replace(/[\u0000-\u001f\u007f]/g, ' ').slice(0, 1000)
+        : undefined;
+      let diagnostic = {};
+      try {
+        const body = await response.json();
+        diagnostic = { code: safe(body?.code), message: safe(body?.message) };
+      } catch {
+        // HTML, invalid JSON, and unreadable bodies retain the HTTP fallback.
+      }
+      const fields = Object.fromEntries(Object.entries(diagnostic).filter(([, value]) => value));
+      throw new Error(operation + ' failed (HTTP ' + response.status + ')' +
+        (Object.keys(fields).length ? ': ' + JSON.stringify(fields) : ''));
+    }
     try {
       return await response.json();
     } catch {

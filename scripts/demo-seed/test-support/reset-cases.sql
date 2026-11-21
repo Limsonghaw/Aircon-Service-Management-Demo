@@ -163,6 +163,41 @@ create function pg_temp.golden_seed() returns jsonb language sql immutable as $$
     select $seed$__GOLDEN__$seed$::jsonb
 $$;
 
+-- jsonb_populate_record ignores unknown keys, so reject them explicitly here.
+do $$
+declare
+    mapping record;
+    row_data jsonb;
+    column_name text;
+    target text;
+begin
+    for mapping in select * from (values
+        ('teams', 'teams'), ('employees', 'employees'), ('customers', 'customers'),
+        ('quotes', 'quotes'), ('quoteItems', 'quote_items'), ('jobs', 'jobs'),
+        ('invoices', 'invoices'), ('expenses', 'expenses')
+    ) as tables(seed_key, table_name) loop
+        for row_data in select value from jsonb_array_elements(pg_temp.golden_seed() -> mapping.seed_key) loop
+            for column_name in select jsonb_object_keys(row_data) loop
+                assert exists (select 1 from pg_attribute
+                    where attrelid = ('public.' || mapping.table_name)::regclass
+                    and attname = column_name and attnum > 0 and not attisdropped),
+                    format('Unknown seed column %s.%s', mapping.seed_key, column_name);
+            end loop;
+        end loop;
+    end loop;
+    foreach target in array array['customers','jobs','invoices','quotes','expenses','teams','employees'] loop
+        assert exists (select 1 from pg_trigger where tgrelid = ('public.' || target)::regclass
+            and tgname = target || '_record_activity' and not tgisinternal and tgenabled = 'O'),
+            format('Missing or disabled activity trigger for %s', target);
+    end loop;
+    foreach target in array array['reference_documents','document_archives','customer_returned_documents',
+        'job_po_documents','job_photos','expense_receipts','signed_documents','owner_saved_signatures',
+        'invoices','jobs','quotes','expenses','customers','user_profiles','employees','teams','activity_logs'] loop
+        assert to_regclass('public.' || target) is not null, format('Missing reset table %s', target);
+    end loop;
+end;
+$$;
+
 set role service_role;
 select public.reset_demo_data(array['demo@gmail.com'], pg_temp.golden_seed(), '2026-11-20', 'golden-test');
 reset role;

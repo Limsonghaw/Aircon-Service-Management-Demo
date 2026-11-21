@@ -54,7 +54,8 @@ function testSocket() {
   try {
     for (const [name, sql] of files) {
       console.log('Applying ' + name);
-      run('psql', [...connect, '-X', '-v', 'ON_ERROR_STOP=1', '-d', database], sql);
+      const output = run('psql', [...connect, '-X', '-v', 'ON_ERROR_STOP=1', '-v', 'VERBOSITY=verbose', '-d', database], sql);
+      if (name === 'reset-cases.sql') console.log(output);
     }
   } finally {
     run('dropdb', [...connect, database]);
