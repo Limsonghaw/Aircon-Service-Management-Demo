@@ -1,0 +1,1040 @@
+{
+  "version": 1,
+  "_meta": "Fictional demo export. Business dates use relative tokens.",
+  "teams": [
+    {
+      "id": "40b42ec0-39c8-4984-a4c2-cd2122340333",
+      "name": "Team A",
+      "notes": null,
+      "is_active": true,
+      "created_at": "2026-11-17T06:45:48.58627+00:00",
+      "updated_at": "2026-11-17T06:45:48.58627+00:00"
+    },
+    {
+      "id": "5df82c42-3a43-464e-98c0-f30165ada61e",
+      "name": "Demo Service Team",
+      "notes": "Fictional team for the complete English service walkthrough.",
+      "is_active": true,
+      "created_at": "2026-11-17T16:28:21.484128+00:00",
+      "updated_at": "2026-11-17T16:28:21.484128+00:00"
+    },
+    {
+      "id": "7fcc83a5-019d-4fd8-9d88-d5eea5876965",
+      "name": "Portfolio Demo Team",
+      "notes": "Fictional team for the English walkthrough.",
+      "is_active": true,
+      "created_at": "2026-11-17T08:19:05.380259+00:00",
+      "updated_at": "2026-11-17T08:19:05.380259+00:00"
+    },
+    {
+      "id": "ef5f649c-0e49-49d9-9f65-37eb74f66b9d",
+      "name": "Willow Demo Team 1811",
+      "notes": "Fictional team for portfolio demonstrations.",
+      "is_active": true,
+      "created_at": "2026-11-18T10:56:59.248426+00:00",
+      "updated_at": "2026-11-18T10:56:59.248426+00:00"
+    }
+  ],
+  "employees": [
+    {
+      "id": "090e0a29-515a-48e3-8b72-1bf870b591a4",
+      "team_id": "5df82c42-3a43-464e-98c0-f30165ada61e",
+      "name": "Alex Demo",
+      "phone": "000-000-0040",
+      "role": "Service Technician",
+      "notes": "Fictional demonstration employee.",
+      "is_active": true,
+      "created_at": "2026-11-17T16:28:22.4747+00:00",
+      "updated_at": "2026-11-17T16:28:22.4747+00:00"
+    },
+    {
+      "id": "6b89117d-4ead-484d-a795-36c390af46ec",
+      "team_id": "ef5f649c-0e49-49d9-9f65-37eb74f66b9d",
+      "name": "Alex Demo",
+      "phone": "000-000-1811",
+      "role": "Demo Technician",
+      "notes": null,
+      "is_active": true,
+      "created_at": "2026-11-18T10:57:12.964674+00:00",
+      "updated_at": "2026-11-18T10:57:12.964674+00:00"
+    },
+    {
+      "id": "c00f0a43-5568-4b82-82ea-f7170be806a7",
+      "team_id": "7fcc83a5-019d-4fd8-9d88-d5eea5876965",
+      "name": "Alex Demo",
+      "phone": "000-000-0020",
+      "role": "Service Technician",
+      "notes": "Fictional technician for servicing and inspection demonstrations.",
+      "is_active": true,
+      "created_at": "2026-11-17T08:19:29.95314+00:00",
+      "updated_at": "2026-11-17T08:19:53.354398+00:00"
+    },
+    {
+      "id": "cd57516f-051b-4c08-90fa-1f90330d314c",
+      "team_id": "5df82c42-3a43-464e-98c0-f30165ada61e",
+      "name": "Jamie Demo",
+      "phone": "000-000-0041",
+      "role": "Service Technician",
+      "notes": "Fictional demonstration employee.",
+      "is_active": true,
+      "created_at": "2026-11-17T16:28:23.262204+00:00",
+      "updated_at": "2026-11-17T16:28:23.262204+00:00"
+    }
+  ],
+  "customers": [
+    {
+      "id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "name": "Willow Demo Home 2",
+      "customer_type": "individual",
+      "phone": "000-000-5678",
+      "email": "willow.demo@example.com",
+      "address": "Unit 88, Demo Residence, Demo Street",
+      "notes": "Two wall-mounted air conditioners require routine cleaning.",
+      "created_at": "2026-11-18T10:28:54.755371+00:00",
+      "updated_at": "2026-11-18T10:29:18.990902+00:00"
+    },
+    {
+      "id": "34c3f27c-e3ab-4ef8-98f1-4cddccc12a08",
+      "name": "Willow Demo Home",
+      "customer_type": "individual",
+      "phone": "000-000-0038",
+      "email": "willow-service@example.com",
+      "address": "Unit 08, Demo Residence, Demo Street",
+      "notes": "Two wall-mounted air conditioners require routine cleaning.",
+      "created_at": "2026-11-17T16:38:14.072548+00:00",
+      "updated_at": "2026-11-17T16:38:14.072548+00:00"
+    },
+    {
+      "id": "36826b34-7341-4e48-863a-7ea10b3fdcd9",
+      "name": "Demo Customer B",
+      "customer_type": "business",
+      "phone": "123456789",
+      "email": "CustomerB@example.com",
+      "address": "Address",
+      "notes": "Notes",
+      "created_at": "2026-11-16T13:00:10.800899+00:00",
+      "updated_at": "2026-11-16T13:00:10.800899+00:00"
+    },
+    {
+      "id": "4d6abda3-9685-413d-828a-13f437f5a672",
+      "name": "Willow Demo Service Residence",
+      "customer_type": "individual",
+      "phone": "000-000-0038",
+      "email": "willow-service@example.com",
+      "address": "Unit 08, Demo Residence, Demo Street",
+      "notes": "Two wall-mounted air conditioners require routine cleaning.",
+      "created_at": "2026-11-17T16:35:57.240043+00:00",
+      "updated_at": "2026-11-17T16:35:57.240043+00:00"
+    },
+    {
+      "id": "51dd989a-e5cf-49df-a6ab-8efe56f41bc0",
+      "name": "Portfolio Demo - Maple Residence",
+      "customer_type": "individual",
+      "phone": "0100000000",
+      "email": "maple-demo@example.com",
+      "address": "Demo Unit 12, Example Residence, Johor Bahru",
+      "notes": "Fictional customer for the English portfolio walkthrough. No real contact details.",
+      "created_at": "2026-11-17T07:04:56.116104+00:00",
+      "updated_at": "2026-11-17T07:04:56.116104+00:00"
+    },
+    {
+      "id": "5a08adbf-705b-4d51-a148-a13414c4c636",
+      "name": "Willow Demo Residence",
+      "customer_type": "individual",
+      "phone": "123456789",
+      "email": "willow@example.com",
+      "address": "Demo Address",
+      "notes": "Notes",
+      "created_at": "2026-11-17T10:57:42.619325+00:00",
+      "updated_at": "2026-11-17T10:57:42.619325+00:00"
+    },
+    {
+      "id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "name": "Portfolio Demo - Cedar Residence",
+      "customer_type": "individual",
+      "phone": "000-000-0012",
+      "email": "cedar-demo@example.com",
+      "address": "Unit 12, Demo Residence, Johor Bahru",
+      "notes": "Fictional demo customer. Two air conditioners; arrange a follow-up performance check.",
+      "created_at": "2026-11-17T07:08:24.87976+00:00",
+      "updated_at": "2026-11-17T07:52:36.054137+00:00"
+    },
+    {
+      "id": "cfc3446c-8306-486f-9caf-b79fad5edb2c",
+      "name": "Demo Customer A",
+      "customer_type": "individual",
+      "phone": "00000000000000",
+      "email": "demo.customer@example.com",
+      "address": "demo address",
+      "notes": "Test customer for portfolio demonstration",
+      "created_at": "2026-10-23T15:06:36.28491+00:00",
+      "updated_at": "2026-10-23T15:06:36.28491+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000001",
+      "name": "Portfolio Demo - Tan Residence",
+      "customer_type": "individual",
+      "phone": "000-000-0001",
+      "email": null,
+      "address": "Demo Address A",
+      "notes": "Synthetic portfolio data",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000002",
+      "name": "Portfolio Demo - Lee Office",
+      "customer_type": "business",
+      "phone": "000-000-0002",
+      "email": null,
+      "address": "Demo Address B",
+      "notes": "Synthetic portfolio data",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000003",
+      "name": "Portfolio Demo - Lim Residence",
+      "customer_type": "individual",
+      "phone": "000-000-0003",
+      "email": null,
+      "address": "Demo Address C",
+      "notes": "Synthetic portfolio data",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000004",
+      "name": "Portfolio Demo - ABC Cafe",
+      "customer_type": "business",
+      "phone": "000-000-0004",
+      "email": null,
+      "address": "Demo Address D",
+      "notes": "Synthetic portfolio data",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000005",
+      "name": "Portfolio Demo - XYZ Retail",
+      "customer_type": "business",
+      "phone": "000-000-0005",
+      "email": null,
+      "address": "Demo Address E",
+      "notes": "Synthetic portfolio data",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "fec6087a-b279-47a3-8f95-f1217c7fffe0",
+      "name": "Willow Rehearsal Residence",
+      "customer_type": "individual",
+      "phone": "000-000-0038",
+      "email": "willow-service@example.com",
+      "address": "Unit 08, Demo Residence, Demo Street",
+      "notes": "Two wall-mounted air conditioners require routine cleaning.",
+      "created_at": "2026-11-17T16:28:28.901427+00:00",
+      "updated_at": "2026-11-17T16:28:28.901427+00:00"
+    }
+  ],
+  "quotes": [
+    {
+      "id": "19408115-9874-48bb-80ed-0b67cb4bf8b6",
+      "quote_number": "PORT-EN-Q003",
+      "customer_id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "valid_until": "today+11",
+      "status": "draft",
+      "notes": "Fictional service quotation for two air conditioners.",
+      "created_at": "2026-11-17T14:38:55.452989+00:00",
+      "updated_at": "2026-11-17T14:38:55.452989+00:00"
+    },
+    {
+      "id": "1cb3289b-eec9-4ed9-9b83-c0882af4ae2c",
+      "quote_number": "TRY-1811-Q01",
+      "customer_id": "fec6087a-b279-47a3-8f95-f1217c7fffe0",
+      "valid_until": "today+12",
+      "status": "accepted",
+      "notes": "Routine cleaning for two air conditioners. Demo quotation.",
+      "created_at": "2026-11-17T16:28:34.226898+00:00",
+      "updated_at": "2026-11-17T16:30:27.272698+00:00"
+    },
+    {
+      "id": "23a23270-72cf-48b0-b7c9-debbc0a51cbf",
+      "quote_number": "PORT-EN-Q001",
+      "customer_id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "valid_until": "today+11",
+      "status": "accepted",
+      "notes": "Fictional service quotation for two air conditioners.",
+      "created_at": "2026-11-17T07:10:27.7953+00:00",
+      "updated_at": "2026-11-17T07:11:32.887226+00:00"
+    },
+    {
+      "id": "26795138-3f6a-42a0-8dc5-581b3d5e0a1b",
+      "quote_number": "QT-DEMO-1811-V3",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "valid_until": "today+28",
+      "status": "accepted",
+      "notes": "Demo service approved for two air conditioners.",
+      "created_at": "2026-11-18T16:59:43.746867+00:00",
+      "updated_at": "2026-11-18T17:03:54.292739+00:00"
+    },
+    {
+      "id": "30728e72-ca39-4e01-8ac0-80fe327ae475",
+      "quote_number": "DEMO-1811B-Q01",
+      "customer_id": "34c3f27c-e3ab-4ef8-98f1-4cddccc12a08",
+      "valid_until": "today+12",
+      "status": "accepted",
+      "notes": "Routine cleaning for two air conditioners. Demo quotation.",
+      "created_at": "2026-11-17T16:39:26.125218+00:00",
+      "updated_at": "2026-11-18T07:34:12.33026+00:00"
+    },
+    {
+      "id": "3773d3c7-332c-43d5-ab40-684c5bd0a3e0",
+      "quote_number": "QT-DEMO-1811-V2",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "valid_until": "today+28",
+      "status": "accepted",
+      "notes": "Demo service approved for two air conditioners.",
+      "created_at": "2026-11-18T15:27:53.4889+00:00",
+      "updated_at": "2026-11-18T15:28:11.253437+00:00"
+    },
+    {
+      "id": "3f26a877-6114-40b6-aea7-ae01d7a3f554",
+      "quote_number": "QT-DEMO-1811-C02R2",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "valid_until": "today+28",
+      "status": "draft",
+      "notes": "Demo quotation for routine air conditioner cleaning.",
+      "created_at": "2026-11-18T10:50:43.363853+00:00",
+      "updated_at": "2026-11-18T10:50:43.363853+00:00"
+    },
+    {
+      "id": "64f1e050-1c1b-41fb-8d18-c4b0a6b73c7e",
+      "quote_number": "PORT-EN-Q004",
+      "customer_id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "valid_until": "today+11",
+      "status": "draft",
+      "notes": "Fictional service quotation for two air conditioners.",
+      "created_at": "2026-11-17T14:56:50.793789+00:00",
+      "updated_at": "2026-11-17T14:56:50.793789+00:00"
+    },
+    {
+      "id": "659c7d19-1c4b-414f-bc97-004d0d845ee5",
+      "quote_number": "QT-DEMO-1811-C02R4",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "valid_until": "today+28",
+      "status": "accepted",
+      "notes": "Demo service approved for two air conditioners.",
+      "created_at": "2026-11-18T10:53:35.750031+00:00",
+      "updated_at": "2026-11-18T10:53:52.322697+00:00"
+    },
+    {
+      "id": "6e380473-36eb-4486-acf7-30c50a72aa65",
+      "quote_number": "PORT-EN-Q002",
+      "customer_id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "valid_until": "today+11",
+      "status": "draft",
+      "notes": "Fictional service quotation for two air conditioners.",
+      "created_at": "2026-11-17T13:26:06.087114+00:00",
+      "updated_at": "2026-11-17T13:26:06.087114+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000201",
+      "quote_number": "PORT-DEMO-Q001",
+      "customer_id": "d3000000-0000-4000-8000-000000000001",
+      "valid_until": "today-17",
+      "status": "sent",
+      "notes": "Synthetic portfolio quote",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000202",
+      "quote_number": "PORT-DEMO-Q002",
+      "customer_id": "d3000000-0000-4000-8000-000000000002",
+      "valid_until": "today-17",
+      "status": "sent",
+      "notes": "Synthetic portfolio quote",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000203",
+      "quote_number": "PORT-DEMO-Q003",
+      "customer_id": "d3000000-0000-4000-8000-000000000003",
+      "valid_until": "today-10",
+      "status": "accepted",
+      "notes": "Synthetic portfolio quote",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d575c2d9-44b6-45d2-95e4-b72dfb9d24e1",
+      "quote_number": "1",
+      "customer_id": "cfc3446c-8306-486f-9caf-b79fad5edb2c",
+      "valid_until": "today-21",
+      "status": "draft",
+      "notes": null,
+      "created_at": "2026-10-23T15:20:00.797055+00:00",
+      "updated_at": "2026-10-23T15:20:00.797055+00:00"
+    },
+    {
+      "id": "ee7131c9-481e-4c7e-b487-b7dd14fb8299",
+      "quote_number": "QT-DEMO-1811-C02R3",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "valid_until": "today+28",
+      "status": "draft",
+      "notes": "Demo quotation for routine air conditioner cleaning.",
+      "created_at": "2026-11-18T10:52:19.072839+00:00",
+      "updated_at": "2026-11-18T10:52:19.072839+00:00"
+    },
+    {
+      "id": "fab52e58-0cdc-470b-9f8e-dc2ef17c9610",
+      "quote_number": "QT-DEMO-1811-C02",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "valid_until": "today+28",
+      "status": "draft",
+      "notes": "Demo quotation for routine air conditioner cleaning.",
+      "created_at": "2026-11-18T10:49:24.809123+00:00",
+      "updated_at": "2026-11-18T10:49:24.809123+00:00"
+    }
+  ],
+  "quoteItems": [
+    {
+      "id": "04693dee-3653-44c1-af18-4402a03ac22c",
+      "quote_id": "6e380473-36eb-4486-acf7-30c50a72aa65",
+      "position": 1,
+      "description": "Wall-mounted air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "12242590-43e3-4d04-a12d-015414b79474",
+      "quote_id": "d575c2d9-44b6-45d2-95e4-b72dfb9d24e1",
+      "position": 1,
+      "description": "Air Conditioner General Servicing",
+      "quantity": 1,
+      "unit_price": 150
+    },
+    {
+      "id": "1a60216a-8904-4e53-934d-7f02d6470664",
+      "quote_id": "30728e72-ca39-4e01-8ac0-80fe327ae475",
+      "position": 1,
+      "description": "Wall-mounted air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "1b250272-93ec-4ee1-b5be-d9fbd7f06519",
+      "quote_id": "26795138-3f6a-42a0-8dc5-581b3d5e0a1b",
+      "position": 1,
+      "description": "Demo air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "26f0d534-f140-4718-a60a-736c643dbd4e",
+      "quote_id": "3773d3c7-332c-43d5-ab40-684c5bd0a3e0",
+      "position": 1,
+      "description": "Demo air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "27f3f79a-6fa5-4f21-8bda-88e321e71cab",
+      "quote_id": "659c7d19-1c4b-414f-bc97-004d0d845ee5",
+      "position": 1,
+      "description": "Demo air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "318d1b36-8bc7-4eb4-9d1e-25fc20b70f0c",
+      "quote_id": "fab52e58-0cdc-470b-9f8e-dc2ef17c9610",
+      "position": 1,
+      "description": "Demo air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "732fa5a0-490a-4c31-893c-2d2dd7a4dd15",
+      "quote_id": "23a23270-72cf-48b0-b7c9-debbc0a51cbf",
+      "position": 1,
+      "description": "Wall-mounted air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "b4338919-e0df-4ec8-a17c-af5b3c0935b2",
+      "quote_id": "64f1e050-1c1b-41fb-8d18-c4b0a6b73c7e",
+      "position": 1,
+      "description": "Wall-mounted air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000301",
+      "quote_id": "d3000000-0000-4000-8000-000000000201",
+      "position": 1,
+      "description": "Air Conditioner Servicing",
+      "quantity": 2,
+      "unit_price": 120
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000302",
+      "quote_id": "d3000000-0000-4000-8000-000000000202",
+      "position": 1,
+      "description": "Aircon Inspection",
+      "quantity": 3,
+      "unit_price": 90
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000303",
+      "quote_id": "d3000000-0000-4000-8000-000000000203",
+      "position": 1,
+      "description": "Aircon Repair Service",
+      "quantity": 1,
+      "unit_price": 350
+    },
+    {
+      "id": "e54e6256-9a00-418c-a82d-ea6a86cd7b50",
+      "quote_id": "19408115-9874-48bb-80ed-0b67cb4bf8b6",
+      "position": 1,
+      "description": "Wall-mounted air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "ee342f8f-114f-4909-9d8b-cd85c666f12e",
+      "quote_id": "3f26a877-6114-40b6-aea7-ae01d7a3f554",
+      "position": 1,
+      "description": "Demo air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "f4160987-f036-49a0-99fa-eb12b37bed3b",
+      "quote_id": "1cb3289b-eec9-4ed9-9b83-c0882af4ae2c",
+      "position": 1,
+      "description": "Wall-mounted air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    },
+    {
+      "id": "f579fe80-718c-4dfc-9166-6b91fad4c32a",
+      "quote_id": "ee7131c9-481e-4c7e-b487-b7dd14fb8299",
+      "position": 1,
+      "description": "Demo air conditioner cleaning",
+      "quantity": 2,
+      "unit_price": 80
+    }
+  ],
+  "jobs": [
+    {
+      "id": "04b377e8-8050-416e-a740-91e455a258a6",
+      "job_number": "PORT-EN-J002",
+      "customer_id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "title": "Follow-up cooling performance inspection",
+      "service_date": "today+5",
+      "team": "Team A",
+      "status": "scheduled",
+      "source_quote_id": null,
+      "created_at": "2026-11-17T07:53:13.74856+00:00",
+      "updated_at": "2026-11-17T07:53:13.74856+00:00"
+    },
+    {
+      "id": "15d4b3ae-fba5-4623-9012-cf4221d84825",
+      "job_number": "1",
+      "customer_id": "36826b34-7341-4e48-863a-7ea10b3fdcd9",
+      "title": "Job Description",
+      "service_date": "today-4",
+      "team": "未安排",
+      "status": "pending",
+      "source_quote_id": null,
+      "created_at": "2026-11-16T13:00:37.2311+00:00",
+      "updated_at": "2026-11-16T13:00:37.2311+00:00"
+    },
+    {
+      "id": "220c3693-0fbf-4033-8213-8d587990c5b8",
+      "job_number": "JOB-3D250A8483F9B6D4B028ED9F",
+      "customer_id": "cfc3446c-8306-486f-9caf-b79fad5edb2c",
+      "title": "demo job",
+      "service_date": "today-28",
+      "team": "未安排",
+      "status": "pending",
+      "source_quote_id": null,
+      "created_at": "2026-10-23T15:16:59.694161+00:00",
+      "updated_at": "2026-10-23T15:16:59.694161+00:00"
+    },
+    {
+      "id": "2c9407e8-5319-4eed-bef7-2c8017a22fbe",
+      "job_number": "DEMO-1811B-J01",
+      "customer_id": "34c3f27c-e3ab-4ef8-98f1-4cddccc12a08",
+      "title": "Wall-mounted air conditioner cleaning",
+      "service_date": "today+5",
+      "team": "Demo Service Team",
+      "status": "completed",
+      "source_quote_id": "30728e72-ca39-4e01-8ac0-80fe327ae475",
+      "created_at": "2026-11-17T16:40:22.903107+00:00",
+      "updated_at": "2026-11-18T03:07:36.775855+00:00"
+    },
+    {
+      "id": "40ee0cd9-a3fd-4864-883d-2e323a6bcefd",
+      "job_number": "JOB-DEMO-1811-V3",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "title": "Demo quotation cleaning job",
+      "service_date": "today+5",
+      "team": "未安排",
+      "status": "pending",
+      "source_quote_id": "26795138-3f6a-42a0-8dc5-581b3d5e0a1b",
+      "created_at": "2026-11-18T17:04:25.110001+00:00",
+      "updated_at": "2026-11-18T17:04:25.110001+00:00"
+    },
+    {
+      "id": "60654f5e-d736-422a-a821-0d06be36c26c",
+      "job_number": "PORT-EN-J003",
+      "customer_id": "5a08adbf-705b-4d51-a148-a13414c4c636",
+      "title": "Routine servicing and cleaning for two wall-mounted air conditioners.",
+      "service_date": "today",
+      "team": "Team A",
+      "status": "scheduled",
+      "source_quote_id": null,
+      "created_at": "2026-11-17T12:47:37.378493+00:00",
+      "updated_at": "2026-11-17T12:47:37.378493+00:00"
+    },
+    {
+      "id": "8e8119c2-a7f1-4a37-aabc-f1620c1ff6d6",
+      "job_number": "JOB-DEMO-1811-V2",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "title": "Demo quotation cleaning job",
+      "service_date": "today+5",
+      "team": "未安排",
+      "status": "pending",
+      "source_quote_id": "3773d3c7-332c-43d5-ab40-684c5bd0a3e0",
+      "created_at": "2026-11-18T15:28:22.161684+00:00",
+      "updated_at": "2026-11-18T15:28:22.161684+00:00"
+    },
+    {
+      "id": "96da1d80-11fd-4fcc-9fed-f6d21e55e7b3",
+      "job_number": "JOB-DEMO-1811-C02R4",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "title": "Demo quotation cleaning job",
+      "service_date": "today+5",
+      "team": "Willow Demo Team 1811",
+      "status": "scheduled",
+      "source_quote_id": "659c7d19-1c4b-414f-bc97-004d0d845ee5",
+      "created_at": "2026-11-18T10:54:03.177978+00:00",
+      "updated_at": "2026-11-18T10:57:27.142471+00:00"
+    },
+    {
+      "id": "a9ceba81-c24e-4cbb-ae87-c9dc628a731e",
+      "job_number": "PORT-EN-J001",
+      "customer_id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "title": "Cleaning and performance check for two air conditioners",
+      "service_date": "today-2",
+      "team": "Team A",
+      "status": "completed",
+      "source_quote_id": "23a23270-72cf-48b0-b7c9-debbc0a51cbf",
+      "created_at": "2026-11-17T07:12:03.667446+00:00",
+      "updated_at": "2026-11-17T07:49:49.14656+00:00"
+    },
+    {
+      "id": "c77d181c-91c7-4605-90de-676ef5364957",
+      "job_number": "TRY-1811-J01",
+      "customer_id": "fec6087a-b279-47a3-8f95-f1217c7fffe0",
+      "title": "Wall-mounted air conditioner cleaning",
+      "service_date": "today+5",
+      "team": "Demo Service Team",
+      "status": "completed",
+      "source_quote_id": "1cb3289b-eec9-4ed9-9b83-c0882af4ae2c",
+      "created_at": "2026-11-17T16:30:33.446294+00:00",
+      "updated_at": "2026-11-17T16:31:57.356986+00:00"
+    },
+    {
+      "id": "ceb3dbd0-5f14-499b-af47-cda5b8306aaa",
+      "job_number": "JOB-155400D556814C2B2594D98A",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "title": "Demo scheduled maintenance 1811",
+      "service_date": "today+6",
+      "team": "Willow Demo Team 1811",
+      "status": "scheduled",
+      "source_quote_id": null,
+      "created_at": "2026-11-18T10:58:37.446407+00:00",
+      "updated_at": "2026-11-18T10:58:52.981333+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000101",
+      "job_number": "PORT-DEMO-J001",
+      "customer_id": "d3000000-0000-4000-8000-000000000001",
+      "title": "Air Conditioner Servicing",
+      "service_date": "today-24",
+      "team": "Team A",
+      "status": "scheduled",
+      "source_quote_id": null,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000102",
+      "job_number": "PORT-DEMO-J002",
+      "customer_id": "d3000000-0000-4000-8000-000000000002",
+      "title": "Office Aircon Inspection",
+      "service_date": "today-24",
+      "team": "Team B",
+      "status": "in_progress",
+      "source_quote_id": null,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000103",
+      "job_number": "PORT-DEMO-J003",
+      "customer_id": "d3000000-0000-4000-8000-000000000003",
+      "title": "Aircon Repair",
+      "service_date": "today-23",
+      "team": "Team A",
+      "status": "scheduled",
+      "source_quote_id": null,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000104",
+      "job_number": "PORT-DEMO-J004",
+      "customer_id": "d3000000-0000-4000-8000-000000000004",
+      "title": "Cafe Aircon Maintenance",
+      "service_date": "today-25",
+      "team": "Team B",
+      "status": "completed",
+      "source_quote_id": null,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000105",
+      "job_number": "PORT-DEMO-J005",
+      "customer_id": "d3000000-0000-4000-8000-000000000005",
+      "title": "Aircon Installation",
+      "service_date": "today-26",
+      "team": "Team A",
+      "status": "completed",
+      "source_quote_id": null,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000106",
+      "job_number": "PORT-DEMO-J006",
+      "customer_id": "d3000000-0000-4000-8000-000000000001",
+      "title": "Cooling Performance Check",
+      "service_date": "today-22",
+      "team": "未安排",
+      "status": "pending",
+      "source_quote_id": null,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "0532f145-b853-4630-ae93-f9f0bffd9df9",
+      "invoice_number": "DEMO-1811B-I01",
+      "customer_id": "34c3f27c-e3ab-4ef8-98f1-4cddccc12a08",
+      "amount": 160,
+      "due_date": "today+19",
+      "status": "paid",
+      "notes": null,
+      "source_quote_id": "30728e72-ca39-4e01-8ac0-80fe327ae475",
+      "items": [
+        {
+          "quantity": 2,
+          "unitPrice": 80,
+          "description": "Wall-mounted air conditioner cleaning"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-11-18T03:08:06.708548+00:00",
+      "updated_at": "2026-11-18T03:08:29.788724+00:00"
+    },
+    {
+      "id": "28163045-3d1b-47df-a541-07c89a307a80",
+      "invoice_number": "INV-DEMO-001",
+      "customer_id": "cfc3446c-8306-486f-9caf-b79fad5edb2c",
+      "amount": 150,
+      "due_date": "today-18",
+      "status": "unpaid",
+      "notes": null,
+      "source_quote_id": null,
+      "items": [
+        {
+          "quantity": 1,
+          "unitPrice": 150,
+          "description": "Air Conditioner Servicing"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-10-23T15:22:54.103368+00:00",
+      "updated_at": "2026-10-23T15:23:20.257502+00:00"
+    },
+    {
+      "id": "5ab1f991-df50-4351-96de-36abb9621bd6",
+      "invoice_number": "INV-DEMO-1811-C02R4",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "amount": 160,
+      "due_date": "today+28",
+      "status": "unpaid",
+      "notes": null,
+      "source_quote_id": "659c7d19-1c4b-414f-bc97-004d0d845ee5",
+      "items": [
+        {
+          "quantity": 2,
+          "unitPrice": 80,
+          "description": "Demo air conditioner cleaning"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-11-18T10:54:10.029571+00:00",
+      "updated_at": "2026-11-18T10:54:10.029571+00:00"
+    },
+    {
+      "id": "8491d463-1e1d-4b5f-aee7-a1ab0086bb6c",
+      "invoice_number": "INV-DEMO-1811-C06-V2",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "amount": 160,
+      "due_date": "today+28",
+      "status": "paid",
+      "notes": "Demo invoice for two air conditioner cleaning services.",
+      "source_quote_id": null,
+      "items": [],
+      "discount": 0,
+      "created_at": "2026-11-18T15:31:43.524076+00:00",
+      "updated_at": "2026-11-18T15:31:53.305013+00:00"
+    },
+    {
+      "id": "88fcc25c-b79c-4342-9b0b-785f95855d18",
+      "invoice_number": "INV-DEMO-1811-V3",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "amount": 160,
+      "due_date": "today+28",
+      "status": "unpaid",
+      "notes": null,
+      "source_quote_id": "26795138-3f6a-42a0-8dc5-581b3d5e0a1b",
+      "items": [
+        {
+          "quantity": 2,
+          "unitPrice": 80,
+          "description": "Demo air conditioner cleaning"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-11-18T17:04:35.737709+00:00",
+      "updated_at": "2026-11-18T17:04:35.737709+00:00"
+    },
+    {
+      "id": "9cf2f5aa-f789-4feb-9d31-ea363d1a59e1",
+      "invoice_number": "INV-DEMO-1811-C06",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "amount": 160,
+      "due_date": "today+28",
+      "status": "paid",
+      "notes": "Demo invoice for two air conditioner cleaning services.",
+      "source_quote_id": null,
+      "items": [],
+      "discount": 0,
+      "created_at": "2026-11-18T11:02:14.740715+00:00",
+      "updated_at": "2026-11-18T11:02:24.70456+00:00"
+    },
+    {
+      "id": "c7cd87c4-b607-4cae-ac22-4249418d5878",
+      "invoice_number": "PORT-EN-I001",
+      "customer_id": "cb8f396d-fc48-494b-b1cf-e23c4ba87834",
+      "amount": 160,
+      "due_date": "today+12",
+      "status": "paid",
+      "notes": null,
+      "source_quote_id": "23a23270-72cf-48b0-b7c9-debbc0a51cbf",
+      "items": [
+        {
+          "quantity": 2,
+          "unitPrice": 80,
+          "description": "Wall-mounted air conditioner cleaning"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-11-17T07:18:29.552247+00:00",
+      "updated_at": "2026-11-17T07:18:58.48645+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000401",
+      "invoice_number": "PORT-DEMO-I001",
+      "customer_id": "d3000000-0000-4000-8000-000000000001",
+      "amount": 240,
+      "due_date": "today-17",
+      "status": "paid",
+      "notes": "Synthetic portfolio invoice",
+      "source_quote_id": null,
+      "items": [
+        {
+          "quantity": 2,
+          "unitPrice": 120,
+          "description": "Air Conditioner Servicing"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000402",
+      "invoice_number": "PORT-DEMO-I002",
+      "customer_id": "d3000000-0000-4000-8000-000000000002",
+      "amount": 270,
+      "due_date": "today-27",
+      "status": "unpaid",
+      "notes": "Synthetic portfolio invoice",
+      "source_quote_id": null,
+      "items": [
+        {
+          "quantity": 3,
+          "unitPrice": 90,
+          "description": "Aircon Inspection"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000403",
+      "invoice_number": "PORT-DEMO-I003",
+      "customer_id": "d3000000-0000-4000-8000-000000000003",
+      "amount": 350,
+      "due_date": "today-14",
+      "status": "unpaid",
+      "notes": "Synthetic portfolio invoice",
+      "source_quote_id": null,
+      "items": [
+        {
+          "quantity": 1,
+          "unitPrice": 350,
+          "description": "Aircon Repair Service"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "e046dfbd-84ca-4f53-b32d-4d77686eae2e",
+      "invoice_number": "INV-DEMO-1811-V2",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "amount": 160,
+      "due_date": "today+28",
+      "status": "unpaid",
+      "notes": null,
+      "source_quote_id": "3773d3c7-332c-43d5-ab40-684c5bd0a3e0",
+      "items": [
+        {
+          "quantity": 2,
+          "unitPrice": 80,
+          "description": "Demo air conditioner cleaning"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-11-18T15:28:29.478143+00:00",
+      "updated_at": "2026-11-18T15:28:29.478143+00:00"
+    },
+    {
+      "id": "f187e3c1-684f-4f4d-a595-03d66b79637f",
+      "invoice_number": "INV-DEMO-1811-C06-V3",
+      "customer_id": "1c71613c-90de-4f5b-af23-f0089a80177d",
+      "amount": 160,
+      "due_date": "today+28",
+      "status": "paid",
+      "notes": "Demo invoice for two air conditioner cleaning services.",
+      "source_quote_id": null,
+      "items": [],
+      "discount": 0,
+      "created_at": "2026-11-18T17:05:55.123152+00:00",
+      "updated_at": "2026-11-18T17:06:08.826338+00:00"
+    },
+    {
+      "id": "fab69813-0e86-4140-b54c-89d832f208b1",
+      "invoice_number": "TRY-1811-I01",
+      "customer_id": "fec6087a-b279-47a3-8f95-f1217c7fffe0",
+      "amount": 160,
+      "due_date": "today+19",
+      "status": "paid",
+      "notes": null,
+      "source_quote_id": "1cb3289b-eec9-4ed9-9b83-c0882af4ae2c",
+      "items": [
+        {
+          "quantity": 2,
+          "unitPrice": 80,
+          "description": "Wall-mounted air conditioner cleaning"
+        }
+      ],
+      "discount": 0,
+      "created_at": "2026-11-17T16:31:59.977577+00:00",
+      "updated_at": "2026-11-17T16:32:48.304747+00:00"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "44452a4f-6592-441b-8c10-875330c18a70",
+      "expense_number": "EXP-DEMO-1811-C07",
+      "description": "Demo cleaning supplies",
+      "amount": 25,
+      "expense_date": "today-2",
+      "status": "confirmed",
+      "notes": "Fictional portfolio demonstration expense.",
+      "created_at": "2026-11-18T11:03:35.194136+00:00",
+      "updated_at": "2026-11-18T11:03:35.194136+00:00"
+    },
+    {
+      "id": "9ca170a5-1f36-45ba-aee1-e850eba1373b",
+      "expense_number": "PORT-EN-E001",
+      "description": "Demo service visit - cleaning supplies",
+      "amount": 35,
+      "expense_date": "today-3",
+      "status": "confirmed",
+      "notes": "Fictional portfolio expense. No actual reimbursement or payment.",
+      "created_at": "2026-11-17T08:15:51.156207+00:00",
+      "updated_at": "2026-11-17T08:16:12.314155+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000501",
+      "expense_number": "PORT-DEMO-E001",
+      "description": "Petrol",
+      "amount": 80,
+      "expense_date": "today-24",
+      "status": "pending",
+      "notes": "Synthetic portfolio expense",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000502",
+      "expense_number": "PORT-DEMO-E002",
+      "description": "Toll and Parking",
+      "amount": 25,
+      "expense_date": "today-24",
+      "status": "confirmed",
+      "notes": "Synthetic portfolio expense",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    },
+    {
+      "id": "d3000000-0000-4000-8000-000000000503",
+      "expense_number": "PORT-DEMO-E003",
+      "description": "Equipment Supplies",
+      "amount": 150,
+      "expense_date": "today-24",
+      "status": "confirmed",
+      "notes": "Synthetic portfolio expense",
+      "created_at": "2026-10-27T12:53:24.187205+00:00",
+      "updated_at": "2026-10-27T12:53:24.187205+00:00"
+    }
+  ],
+  "userProfileLinks": {}
+}

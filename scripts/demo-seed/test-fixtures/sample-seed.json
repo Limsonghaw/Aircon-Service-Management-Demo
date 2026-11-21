@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "teams": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "name": "Example Crew"
+    }
+  ],
+  "employees": [
+    {
+      "id": "00000000-0000-4000-8000-000000000002",
+      "name": "Fictional Technician",
+      "team_id": "00000000-0000-4000-8000-000000000001",
+      "phone": "+1 202-555-0101"
+    }
+  ],
+  "customers": [
+    {
+      "id": "00000000-0000-4000-8000-000000000003",
+      "name": "Example Ice Lab",
+      "customer_type": "business",
+      "phone": "+1 202-555-0100"
+    }
+  ],
+  "quotes": [
+    {
+      "id": "00000000-0000-4000-8000-000000000004",
+      "quote_number": "EXAMPLE-Q-0",
+      "customer_id": "00000000-0000-4000-8000-000000000003",
+      "valid_until": "month-end",
+      "status": "draft"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000005",
+      "quote_number": "EXAMPLE-Q-1",
+      "customer_id": "00000000-0000-4000-8000-000000000003",
+      "valid_until": "month-end",
+      "status": "sent"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000006",
+      "quote_number": "EXAMPLE-Q-2",
+      "customer_id": "00000000-0000-4000-8000-000000000003",
+      "valid_until": "month-end",
+      "status": "accepted"
+    }
+  ],
+  "quoteItems": [
+    {
+      "id": "00000000-0000-4000-8000-000000000007",
+      "quote_id": "00000000-0000-4000-8000-000000000006",
+      "position": 1,
+      "description": "Example service",
+      "quantity": 1,
+      "unit_price": 90
+    }
+  ],
+  "jobs": [
+    {
+      "id": "00000000-0000-4000-8000-000000000008",
+      "job_number": "EXAMPLE-J-1",
+      "customer_id": "00000000-0000-4000-8000-000000000003",
+      "title": "Fictional inspection",
+      "service_date": "today",
+      "status": "scheduled",
+      "team": "Example Crew",
+      "source_quote_id": "00000000-0000-4000-8000-000000000006"
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000009",
+      "job_number": "EXAMPLE-J-2",
+      "customer_id": "00000000-0000-4000-8000-000000000003",
+      "title": "Fictional filter service",
+      "service_date": "month-start",
+      "status": "completed",
+      "team": "Example Crew"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "00000000-0000-4000-8000-000000000010",
+      "invoice_number": "EXAMPLE-I-1",
+      "customer_id": "00000000-0000-4000-8000-000000000003",
+      "amount": 90,
+      "due_date": "today+3",
+      "source_quote_id": "00000000-0000-4000-8000-000000000006",
+      "items": [
+        {
+          "description": "Example service",
+          "quantity": 1,
+          "unitPrice": 90
+        }
+      ]
+    },
+    {
+      "id": "00000000-0000-4000-8000-000000000011",
+      "invoice_number": "EXAMPLE-I-2",
+      "customer_id": "00000000-0000-4000-8000-000000000003",
+      "amount": 40,
+      "due_date": "today-5",
+      "status": "overdue"
+    }
+  ],
+  "expenses": [
+    {
+      "id": "00000000-0000-4000-8000-000000000012",
+      "expense_number": "EXAMPLE-E-1",
+      "description": "Fictional supplies",
+      "amount": 20,
+      "expense_date": "month-start+2"
+    }
+  ],
+  "userProfileLinks": {
+    "demo@gmail.com": "00000000-0000-4000-8000-000000000002"
+  }
+}

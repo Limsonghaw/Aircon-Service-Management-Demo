@@ -269,3 +269,5 @@ The current implementation includes team and employee management and user permis
 ## About This Project
 
 This project demonstrates practical full-stack development experience, including requirements analysis, API development, database integration, business workflow implementation, debugging, and iterative feature delivery.
+
+See [Demo data reset](docs/demo-data-reset.md) for the manual reset and golden seed process.
