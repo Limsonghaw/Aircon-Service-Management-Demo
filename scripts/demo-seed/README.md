@@ -1,6 +1,6 @@
 # Demo golden seed
 
-[`data.json`](data.json) is the phase 1 shell. Its arrays are empty until the fictional demo data is exported and reviewed with Song Haw's approval. A reset with this shell clears all reset-managed business rows.
+[`data.json`](data.json) contains the reviewed fictional golden export approved by Song Haw: 4 teams, 4 employees, 14 customers, 16 quotes, 16 quote items, 17 jobs, 13 invoices, and 5 expenses (89 rows total). It is no longer an empty shell. The export's UUIDs, links, and relative business dates are preserved; `userProfileLinks` is empty.
 
 Set `version` to `1`. Each business array contains rows with database column names and fixed UUIDs, including IDs referenced by other rows.
 

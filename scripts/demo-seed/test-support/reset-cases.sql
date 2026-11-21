@@ -158,3 +158,41 @@ begin
     assert (select min(id) from public.activity_logs) = 1;
 end;
 $$;
+
+create function pg_temp.golden_seed() returns jsonb language sql immutable as $$
+    select $seed$__GOLDEN__$seed$::jsonb
+$$;
+
+set role service_role;
+select public.reset_demo_data(array['demo@gmail.com'], pg_temp.golden_seed(), '2026-11-20', 'golden-test');
+reset role;
+
+create temporary table golden_first_reset as select pg_temp.business_snapshot() as snapshot;
+
+set role service_role;
+select public.reset_demo_data(array['demo@gmail.com'], pg_temp.golden_seed(), '2026-11-20', 'golden-test');
+reset role;
+
+do $$
+declare
+    mapping record;
+    actual_count bigint;
+begin
+    for mapping in select * from (values
+        ('teams', 'teams'), ('employees', 'employees'), ('customers', 'customers'),
+        ('quotes', 'quotes'), ('quoteItems', 'quote_items'), ('jobs', 'jobs'),
+        ('invoices', 'invoices'), ('expenses', 'expenses')
+    ) as tables(seed_key, table_name) loop
+        execute format('select count(*) from public.%I', mapping.table_name) into actual_count;
+        assert actual_count > 0;
+        assert actual_count = jsonb_array_length(pg_temp.golden_seed() -> mapping.seed_key);
+    end loop;
+    assert (select snapshot from golden_first_reset) = pg_temp.business_snapshot();
+    assert (select count(*) from auth.users where email = 'demo@gmail.com') = 1;
+    assert (select count(*) from auth.users) = 1;
+    assert (select count(*) from public.user_profiles where email = 'demo@gmail.com' and role = 'owner') = 1;
+    assert (select count(*) from public.demo_reset_runs where source = 'golden-test') = 2;
+    assert (select count(*) from public.owner_saved_signatures) = 0;
+    assert (select count(*) from public.activity_logs) = 0;
+end;
+$$;

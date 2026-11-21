@@ -3,15 +3,18 @@ import { closeSync, mkdtempSync, openSync, readdirSync, readFileSync, rmSync, wr
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { expandSeed } from '../seed.mjs';
+import { businessTables, expandSeed } from '../seed.mjs';
 
 const database = 'aircon_reset_test_' + process.pid + '_' + Date.now();
 const migrations = new URL('../../../supabase/migrations/', import.meta.url);
 const here = name => readFileSync(new URL(name, import.meta.url), 'utf8');
 const fixture = expandSeed(JSON.parse(here('../test-fixtures/sample-seed.json')), '2026-11-20');
+const golden = expandSeed(JSON.parse(here('../data.json')), '2026-11-20');
+const empty = { version: 1, ...Object.fromEntries(Object.keys(businessTables).map(key => [key, []])), userProfileLinks: {} };
 const cases = here('reset-cases.sql')
   .replace('__FIXTURE__', () => JSON.stringify(fixture))
-  .replace('__EMPTY__', () => here('../data.json'));
+  .replace('__EMPTY__', () => JSON.stringify(empty))
+  .replace('__GOLDEN__', () => JSON.stringify(golden));
 const files = [
   ['stub.sql', here('stub.sql')],
   ...readdirSync(migrations).filter(name => name.endsWith('.sql')).sort()
