@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getCurrentUser, type AuthUser } from '../services/authApi'
-import { coldStartDefaults, isColdStartError, waitForBackend, withRequestTimeout } from '../utils/coldStart'
+import { coldStartDefaults, isColdStartError, startRenderWake, waitForBackend, withRequestTimeout } from '../utils/coldStart'
 import { loadFailure, type LoadFailure } from '../utils/loadFailure'
 
 function positiveNumber(value: unknown, fallback: number) {
@@ -17,6 +17,7 @@ export function useColdStartSession() {
   const [loaded, setLoaded] = useState(false)
   const [isLoading, setLoading] = useState(true)
   const [isWaking, setWaking] = useState(false)
+  const [didWakeTimeOut, setDidWakeTimeOut] = useState(false)
   const [failure, setFailure] = useState<LoadFailure | null>(null)
   const active = useRef<AbortController | null>(null)
 
@@ -27,22 +28,36 @@ export function useColdStartSession() {
     const { signal } = controller
     setLoading(true)
     setWaking(false)
+    setDidWakeTimeOut(false)
     setFailure(null)
 
+    const stopRenderWake = startRenderWake(signal)
     async function loadUser() {
-      const requestUser = () => withRequestTimeout(getCurrentUser, signal, requestTimeoutMs)
-      let user: AuthUser | null
+      const requestUser = (timeout = requestTimeoutMs) => withRequestTimeout(getCurrentUser, signal, timeout)
+      let user: AuthUser | null = null
       try {
         user = await requestUser()
       } catch (error) {
         signal.throwIfAborted()
         if (!isColdStartError(error)) throw error
         setWaking(true)
-        if (!await waitForBackend({ signal, maxWaitMs, pollMs })) {
-          if (!signal.aborted) setFailure({ kind: 'server', message: '服务器暂时没有回应，请稍后重试。' })
+        const ready = await waitForBackend({
+          signal, maxWaitMs, pollMs,
+          confirmReady: async remainingMs => {
+            try {
+              user = await requestUser(Math.min(requestTimeoutMs, remainingMs))
+              return true
+            } catch (error) {
+              signal.throwIfAborted()
+              if (!isColdStartError(error)) throw error
+              return false
+            }
+          },
+        })
+        if (!ready) {
+          if (!signal.aborted) setDidWakeTimeOut(true)
           return
         }
-        user = await requestUser()
       }
       if (!signal.aborted) {
         setData(user)
@@ -53,10 +68,12 @@ export function useColdStartSession() {
     void loadUser().catch(error => {
       if (!signal.aborted) setFailure(loadFailure(error))
     }).finally(() => {
+      stopRenderWake()
       if (!signal.aborted) {
         active.current = null
         setWaking(false)
         setLoading(false)
+        controller.abort()
       }
     })
   }, [])
@@ -67,5 +84,5 @@ export function useColdStartSession() {
     return () => { cancelled = true; active.current?.abort() }
   }, [retry])
 
-  return { data, setData, loaded, isLoading, isWaking, failure, retry }
+  return { data, setData, loaded, isLoading, isWaking, didWakeTimeOut, failure, retry }
 }
