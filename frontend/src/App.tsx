@@ -23,6 +23,7 @@ import { LoginPage } from './pages/LoginPage'
 import { UsersPage } from './pages/UsersPage'
 import { useAuth } from './contexts/useAuth'
 import { useInteraction } from './contexts/InteractionContext'
+import { renderWakeUrl } from './utils/coldStart'
 
 function App() {
   useLanguage()
@@ -66,6 +67,18 @@ function App() {
     </div>
   </main>
   if (loading) return <main className="auth-loading" aria-live="polite">{t("正在确认登录状态…")}</main>
+  if (!user && session.didWakeTimeOut) return <main className="auth-loading">
+    <DataState
+      kind="error"
+      title="服务器暂时没有回应"
+      description="如果重试仍失败，请打开服务器状态页，看到 status: ok 后，回到登录页点「重试」。"
+      action={<>
+        <button className="secondary-button" type="button" onClick={session.retry}>{t("重试")}</button>
+        <a className="secondary-button" href={renderWakeUrl}
+          target="_blank" rel="noopener noreferrer">{t("手动唤醒服务器（新标签页）")}</a>
+      </>}
+    />
+  </main>
   if (!user && session.failure) return <main className="auth-loading"><LoadState state={session} label={t("登录状态")} /></main>
   if (!user) return <LoginPage />
 

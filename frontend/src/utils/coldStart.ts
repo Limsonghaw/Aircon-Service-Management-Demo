@@ -1,4 +1,21 @@
 export const coldStartDefaults = { maxWaitMs: 90_000, pollMs: 4_000, requestTimeoutMs: 10_000 }
+export const renderWakeUrl = import.meta.env?.VITE_RENDER_WAKE_URL?.trim()
+  || 'https://aircon-service-management-demo.onrender.com/api/health'
+
+export function startRenderWake(signal: AbortSignal): () => void {
+  const wake = () => {
+    if (signal.aborted) return
+    void fetch(renderWakeUrl, {
+      mode: 'no-cors',
+      cache: 'no-store',
+      credentials: 'omit',
+      signal,
+    }).catch(() => {})
+  }
+  wake()
+  const interval = setInterval(wake, 20_000)
+  return () => clearInterval(interval)
+}
 
 class RequestTimeout extends DOMException {
   constructor() {
@@ -61,6 +78,7 @@ type WaitOptions = {
   now?: () => number
   sleep?: (ms: number, signal: AbortSignal) => Promise<void>
   healthUrl?: string
+  confirmReady?: (remainingMs: number) => Promise<boolean>
 }
 
 export async function waitForBackend({
@@ -71,12 +89,14 @@ export async function waitForBackend({
   now = () => performance.now(),
   sleep = sleepUntilPoll,
   healthUrl = '/api/health',
+  confirmReady = async () => true,
 }: WaitOptions): Promise<boolean> {
   const deadline = now() + maxWaitMs
   while (true) {
     signal.throwIfAborted()
     const started = now()
     if (started >= deadline) return false
+    let healthy = false
     try {
       const response = await withRequestTimeout(
         requestSignal => fetchImpl(healthUrl, { method: 'GET', cache: 'no-store', signal: requestSignal }),
@@ -84,10 +104,12 @@ export async function waitForBackend({
         Math.min(pollMs, 5_000, deadline - started),
       )
       signal.throwIfAborted()
-      if (response.ok && now() < deadline) return true
+      healthy = response.ok
     } catch {
       signal.throwIfAborted()
     }
+    const remaining = deadline - now()
+    if (healthy && remaining > 0 && await confirmReady(remaining) && now() < deadline) return true
     const delay = Math.min(started + pollMs, deadline) - now()
     if (delay > 0) await sleep(delay, signal)
   }

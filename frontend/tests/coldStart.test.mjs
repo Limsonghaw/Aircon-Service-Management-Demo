@@ -1,7 +1,75 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { isColdStartError, waitForBackend, withRequestTimeout } from '../src/utils/coldStart.ts'
+import { isColdStartError, renderWakeUrl, startRenderWake, waitForBackend, withRequestTimeout } from '../src/utils/coldStart.ts'
 import { getCurrentUser } from '../src/services/authApi.ts'
+
+test('browser wakes Render immediately and every 20 seconds until stopped', async t => {
+  t.mock.timers.enable({ apis: ['setInterval'] })
+  const fetch = t.mock.method(globalThis, 'fetch', async () => { throw new TypeError('Failed to fetch') })
+  const { signal } = new AbortController()
+  const stop = startRenderWake(signal)
+
+  assert.equal(fetch.mock.callCount(), 1)
+  assert.deepEqual(fetch.mock.calls[0].arguments, [renderWakeUrl, {
+    mode: 'no-cors', cache: 'no-store', credentials: 'omit', signal,
+  }])
+  t.mock.timers.tick(19_999)
+  assert.equal(fetch.mock.callCount(), 1)
+  t.mock.timers.tick(1)
+  assert.equal(fetch.mock.callCount(), 2)
+  stop()
+  t.mock.timers.tick(20_000)
+  assert.equal(fetch.mock.callCount(), 2)
+})
+
+test('health success keeps polling until the session endpoint is ready', async () => {
+  let time = 0
+  let sessionChecks = 0
+  assert.equal(await waitForBackend({
+    signal: new AbortController().signal,
+    fetchImpl: async () => Response.json({ status: 'ok' }),
+    now: () => time,
+    sleep: async ms => { time += ms },
+    confirmReady: async () => ++sessionChecks === 2,
+  }), true)
+  assert.equal(time, 4_000)
+  assert.equal(sessionChecks, 2)
+})
+
+test('only a wake timeout renders the manual wake link alongside Retry', async () => {
+  const { createElement } = await import('react')
+  const { renderToStaticMarkup } = await import('react-dom/server')
+  const { MemoryRouter } = await import('react-router-dom')
+  const { createServer } = await import('vite')
+  const server = await createServer({
+    appType: 'custom',
+    server: { middlewareMode: true, hmr: false, ws: false },
+  })
+  globalThis.document = { documentElement: {} }
+  try {
+    const { default: App } = await server.ssrLoadModule('/src/App.tsx')
+    const { AuthStateContext } = await server.ssrLoadModule('/src/contexts/authStateContext.ts')
+    const { InteractionContext } = await server.ssrLoadModule('/src/contexts/InteractionContext.ts')
+    const baseSession = { isWaking: false, isLoading: false, didWakeTimeOut: false, failure: null, retry() {} }
+    const render = overrides => renderToStaticMarkup(createElement(MemoryRouter, null,
+      createElement(InteractionContext.Provider, { value: {} },
+        createElement(AuthStateContext.Provider, { value: { user: null, session: { ...baseSession, ...overrides } } },
+          createElement(App)))))
+
+    const timedOut = render({ didWakeTimeOut: true })
+    assert.ok(timedOut.includes(`href="${renderWakeUrl}" target="_blank" rel="noopener noreferrer"`))
+    assert.match(timedOut, /<button[^>]*>重试<\/button>/)
+    assert.match(timedOut, /status: ok/)
+    assert.match(render({ isWaking: true }), /正在唤醒服务器/)
+    assert.match(render({}), /登录业务管理系统/)
+    for (const state of [{}, { isWaking: true }, { failure: { kind: 'permission', message: 'Denied' } }]) {
+      assert.ok(!render(state).includes(renderWakeUrl))
+    }
+  } finally {
+    delete globalThis.document
+    await server.close()
+  }
+})
 
 test('network errors, timeouts, rate limits, HTML and gateway failures trigger waking', () => {
   for (const error of [
